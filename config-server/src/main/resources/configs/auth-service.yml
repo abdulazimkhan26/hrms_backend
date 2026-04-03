@@ -1,0 +1,26 @@
+server:
+  port: 8087
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/hrms_db
+    username: postgres
+    password: 260849
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+app:
+  jwt:
+    secret: bWlncmF0aW9uU2VjcmV0S2V5Rm9ySE1BQ1NIQTI1NkFsZ29yaXRobQ==
+    expiration: 3600000
