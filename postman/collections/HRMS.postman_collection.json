@@ -1,0 +1,394 @@
+{
+  "info": {
+    "_postman_id": "13f41499-7c1a-4909-ab7a-47e2a37068ec",
+    "name": "HRMS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "ADMIN",
+      "item": [
+        {
+          "name": "LookupCategories",
+          "item": [
+            {
+              "name": "all_categories",
+              "id": "5058ece2-f134-4ca2-ac9a-e2c3912f3572",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{hrms.com}}/admin/all_categories",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "all_categories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create_category",
+              "id": "543ec708-a026-46a0-8b28-af5b06231dbd",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"code\": \"ROLE\",\r\n    \"label\": \"Role\",\r\n    \"description\": \"The category for role-related items.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{hrms.com}}/admin/create_category",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "create_category"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update_category",
+              "id": "929515a9-3b43-4218-b5fb-e0405f6c410f",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"code\": \"ROLE\",\r\n    \"label\": \"Role\",\r\n    \"description\": \"Thvvdssdsdvsde category for role-related items.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{hrms.com}}/admin/update_category/ROLE",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "update_category",
+                    "ROLE"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete_categories",
+              "id": "a999f4fe-eff9-48bb-afad-f90b193e935a",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{hrms.com}}/admin/delete_category/ROLE",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "delete_category",
+                    "ROLE"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "b6271170-e1ff-47f8-8430-6c236ad7722a"
+        },
+        {
+          "name": "LookupValues",
+          "item": [
+            {
+              "name": "all_values",
+              "id": "380d6b48-f0ec-4fb3-af9c-0791c8bec107",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFhayIsInN1YiI6ImFhayIsImlhdCI6MTc3NTU1MTE1NCwiZXhwIjoxNzc1NTUyMDU0fQ.znuzOBrVoQyNWMO_qon4MZkKmxFaXY5lNifuiQ_ZV2c",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/admin/all_value/DEPARTMENT",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "all_value",
+                    "DEPARTMENT"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create_values",
+              "id": "d1a2c30e-49bd-4ff2-9198-c8d4d0ee9c5e",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"categoryCode\": \"EMPLOYMENT_TYPE\",\r\n    \"displayValue\": \"\",\r\n    \"code\": \"\",\r\n    \"is_active\": true\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{hrms.com}}/admin/create_value",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "create_value"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update_values",
+              "id": "dbdcb272-9072-4ff2-b06d-986fc0341c71",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"categoryCode\": \"MARITAL_STATUS\",\r\n    \"displayValue\": \"UnMarried\",\r\n    \"code\": \"UNMARRIED\"\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/admin/update_value/UNMARRIED1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "update_value",
+                    "UNMARRIED1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete_values",
+              "id": "2e95ca14-4826-4f6c-878b-ae348ddc74ba",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFhayIsInN1YiI6ImFhayIsImlhdCI6MTc3NTUzMTQwOSwiZXhwIjoxNzc1NTMyMzA5fQ.rMj9fhnxrXb12hOUH8srjjY6eSFDN7vFfY3jk4oo7x4",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/admin/delete_category/ADMIN",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "delete_category",
+                    "ADMIN"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "64f942f1-c6a3-4e11-9acc-dd5ab498df92"
+        },
+        {
+          "name": "ROLES",
+          "item": [
+            {
+              "name": "all_roles",
+              "id": "29fcdd63-0d8e-4e36-8ab3-f33aa7e9f333",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{hrms.com}}/admin/allRoles",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "allRoles"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create_roles",
+              "id": "64e4dfac-27d9-4034-b48e-01dfc978539c",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"DATA ANALYST\",\r\n    \"description\": \"Responsible for Data Analytics and Reporting\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{hrms.com}}/admin/create_roles",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "create_roles"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update_roles",
+              "id": "70cc1378-96a1-4d2e-87aa-99f56a762dd9",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"DATA ANALYST\",\r\n    \"description\": \"Responsible for Data Analytics and Reporting\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{hrms.com}}/admin/update_roles/DATA ANALYST",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "update_roles",
+                    "DATA ANALYST"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete_roles",
+              "id": "6e4a5338-f332-4a13-b420-d27741d3cefe",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{hrms.com}}/admin/delete_Roles/DATA ANALYST1",
+                  "host": [
+                    "{{hrms.com}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "delete_Roles",
+                    "DATA ANALYST1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "2a037ce8-8cf8-473b-b8f6-0f0b49cddde7"
+        }
+      ],
+      "id": "86cbad4f-1976-4452-9e6c-7d1274767796"
+    },
+    {
+      "name": "AUTH",
+      "item": [
+        {
+          "name": "AUTH/LOGIN",
+          "id": "83d6a9ee-05bb-434f-b495-6cacf831acf5",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"rb\",\r\n  \"password\": \"260849\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5a11230f-106b-4f39-99c5-5030611f12cb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  }
+}
