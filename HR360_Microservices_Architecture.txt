@@ -39,7 +39,7 @@
   [ 10] notification-service
 
 ================================================================================
-  [ 1 ] API GATEWAY
+  [ 1 ] API GATEWAY                                                      ✅✅✅
 ================================================================================
 
   Port       :  8080
@@ -70,7 +70,7 @@
   /api/notification/**  →   notification-service(8089)
 
 ================================================================================
-  [ 2 ] AUTH SERVICE
+  [ 2 ] AUTH SERVICE                                                     ✅✅✅
 ================================================================================
 
   Port       :  8081
@@ -80,7 +80,6 @@
   Packages Merged
   ---------------
   > com.hrms.backend.auth         (main auth logic)
-  > com.hrms.backend.common       (shared utilities)
   > com.hrms.backend.config       (security config)
 
   Handles
@@ -97,22 +96,27 @@
   auth-service/
   └── com/hr360/auth/
       ├── config/
-      │   ├── SecurityConfig.java
-      │   └── JwtConfig.java
+      │   ├── SecurityConfig.java   ✅
       ├── controller/
-      │   └── AuthController.java
+      │   └── AuthController.java   ✅
       ├── service/
-      │   └── AuthService.java
+      │   └── AuthService.java      ✅
+      │   └── JwtService.java       ✅
+      │   └── UserDetailsServiceIml.java  ✅
       ├── repository/
-      │   └── UserRepository.java
+      │   └── UserRepository.java   ✅
+      │   └── RolesRepository.java  ✅
       ├── model/
-      │   └── User.java
+      │   └── User.java             ✅
+      │   └── Roles.java            ✅
       ├── dto/
-      │   ├── LoginRequest.java
-      │   └── LoginResponse.java
+      │   ├── LoginRequest.java     ✅
+      │   └── LoginResponse.java    ✅
+      ├── filter/
+      │   ├── JwtAuthFilter.java    ✅
       ├── exception/
       │   └── AuthException.java
-      └── AuthServiceApplication.java
+      └── AuthServiceApplication.java  ✅
 
 ================================================================================
   [ 3 ] ADMIN SERVICE
@@ -150,8 +154,8 @@
       ├── config/
       │   └── SecurityConfig.java
       ├── controller/
-      │   ├── LookupController.java
-      │   ├── RoleController.java
+      │   ├── LookupController.java            ✅
+      │   ├── RoleController.java              ✅
       │   ├── KpiController.java
       │   ├── QualificationController.java
       │   ├── PositionQuestionController.java
@@ -161,8 +165,8 @@
       │   ├── PositionController.java
       │   └── JobController.java
       ├── service/
-      │   ├── LookupService.java
-      │   ├── RoleService.java
+      │   ├── LookupService.java               ✅
+      │   ├── RoleService.java                 ✅
       │   ├── KpiService.java
       │   ├── QualificationService.java
       │   ├── PositionQuestionService.java
@@ -172,28 +176,28 @@
       │   ├── PositionService.java
       │   └── JobService.java
       ├── repository/
-      │   ├── LookupRepository.java
-      │   ├── RoleRepository.java
+      │   ├── LookupRepository.java          ✅
+      │   ├── RoleRepository.java            ✅
       │   ├── KpiRepository.java
       │   ├── QualificationRepository.java
       │   ├── PositionRepository.java
       │   └── JobRepository.java
       ├── model/
-      │   ├── LookupCategory.java
-      │   ├── LookupValue.java
-      │   ├── Role.java
+      │   ├── LookupCategory.java           ✅
+      │   ├── LookupValue.java              ✅
+      │   ├── Role.java                     ✅
       │   ├── Kpi.java
       │   ├── Qualification.java
       │   ├── Position.java
       │   └── Job.java
       ├── dto/
-      │   ├── LookupRequest.java
-      │   ├── LookupResponse.java
+      │   ├── LookupRequest.java            ✅
+      │   ├── LookupResponse.java           ✅
       │   ├── PositionRequest.java
       │   └── PositionResponse.java
       ├── exception/
       │   └── AdminException.java
-      └── AdminServiceApplication.java
+      └── AdminServiceApplication.java      ✅
 
 ================================================================================
   [ 4 ] EMPLOYEE SERVICE

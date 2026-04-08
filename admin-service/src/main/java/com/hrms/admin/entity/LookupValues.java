@@ -2,6 +2,7 @@ package com.hrms.admin.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
@@ -21,7 +22,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LookupValue {
+public class LookupValues {
 
     @Id
     @GeneratedValue
@@ -31,7 +32,7 @@ public class LookupValue {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private LookupCategory category;
+    private LookupCategories category;
 
     @Column(name = "display_value", length = 120, nullable = false)
     private String display_value;
@@ -39,9 +40,11 @@ public class LookupValue {
     @Column(name = "code", length = 80, nullable = false, unique = true)
     private String code;
 
+    @ColumnDefault("0")
     @Column(name = "sort_order", nullable = false)
     private Integer sort_order;
 
+    @ColumnDefault("true")
     @Column(name = "is_active", nullable = false)
     private Boolean is_active;
 
@@ -52,14 +55,4 @@ public class LookupValue {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updated_at;
-
-    @PrePersist
-    public void setDefaults(){
-        if(sort_order == null){
-           sort_order = 0;
-        }
-        if(is_active == null){
-            is_active = true;
-        }
-    }
 }

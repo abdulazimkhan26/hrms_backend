@@ -38,7 +38,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"code\": \"ROLE\",\r\n    \"label\": \"Role\",\r\n    \"description\": \"The category for role-related items.\"\r\n}",
+                  "raw": "{\r\n    \"code\": \"COST_CENTRE\",\r\n    \"label\": \"Cost_Centre\",\r\n    \"description\": \"This category for Companies-related items.\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -117,20 +117,10 @@
               "name": "all_values",
               "id": "380d6b48-f0ec-4fb3-af9c-0791c8bec107",
               "request": {
-                "auth": {
-                  "type": "bearer",
-                  "bearer": [
-                    {
-                      "key": "token",
-                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFhayIsInN1YiI6ImFhayIsImlhdCI6MTc3NTU1MTE1NCwiZXhwIjoxNzc1NTUyMDU0fQ.znuzOBrVoQyNWMO_qon4MZkKmxFaXY5lNifuiQ_ZV2c",
-                      "type": "string"
-                    }
-                  ]
-                },
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "http://localhost:8080/admin/all_value/DEPARTMENT",
+                  "raw": "http://localhost:8080/admin/all_values/GENDER",
                   "protocol": "http",
                   "host": [
                     "localhost"
@@ -138,8 +128,8 @@
                   "port": "8080",
                   "path": [
                     "admin",
-                    "all_value",
-                    "DEPARTMENT"
+                    "all_values",
+                    "GENDER"
                   ]
                 }
               },
@@ -147,13 +137,64 @@
             },
             {
               "name": "create_values",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "ec2f050b-23c1-4e8f-b73d-5ccc5208fad6",
+                    "exec": [
+                      "const data = [\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"HR\", \"code\": \"HR\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Finance\", \"code\": \"FINANCE\" },\r",
+                      "  { \"caegoryCode\": \"COST_CENTRE\", \"displayValue\": \"IT \", \"code\": \"IT_COST_CENTRE\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Marketing\", \"code\": \"MARKETING\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Sales\", \"code\": \"SALES\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Operations\", \"code\": \"OPERATIONS\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Research & Development\", \"code\": \"RESEARCH_AND_DEVELOPMENT\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Customer Service\", \"code\": \"CUSTOMER_SERVICE\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Logistics\", \"code\": \"LOGISTICS\" },\r",
+                      "  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Legal\", \"code\": \"LEGAL\" }\r",
+                      "];\r",
+                      "\r",
+                      "let index = pm.collectionVariables.get(\"dataIndex\") || 0;\r",
+                      "index = parseInt(index);\r",
+                      "\r",
+                      "if (index >= data.length) {\r",
+                      "    index = 0;\r",
+                      "}\r",
+                      "\r",
+                      "const current = data[index];\r",
+                      "pm.collectionVariables.set(\"categoryCode\", current.categoryCode);\r",
+                      "pm.collectionVariables.set(\"displayValue\", current.displayValue);\r",
+                      "pm.collectionVariables.set(\"code\", current.code);\r",
+                      "\r",
+                      "pm.collectionVariables.set(\"dataIndex\", index + 1);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "462746a9-facc-4014-a959-e1e7db5467f7",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
               "id": "d1a2c30e-49bd-4ff2-9198-c8d4d0ee9c5e",
               "request": {
                 "method": "POST",
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"categoryCode\": \"EMPLOYMENT_TYPE\",\r\n    \"displayValue\": \"\",\r\n    \"code\": \"\",\r\n    \"is_active\": true\r\n}\r\n\r\n",
+                  "raw": "{\r\n    \"categoryCode\": \"{{categoryCode}}\",\r\n    \"displayValue\": \"{{displayValue}}\",\r\n    \"code\": \"{{code}}\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -208,20 +249,19 @@
               "name": "delete_values",
               "id": "2e95ca14-4826-4f6c-878b-ae348ddc74ba",
               "request": {
-                "auth": {
-                  "type": "bearer",
-                  "bearer": [
-                    {
-                      "key": "token",
-                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFhayIsInN1YiI6ImFhayIsImlhdCI6MTc3NTUzMTQwOSwiZXhwIjoxNzc1NTMyMzA5fQ.rMj9fhnxrXb12hOUH8srjjY6eSFDN7vFfY3jk4oo7x4",
-                      "type": "string"
-                    }
-                  ]
-                },
                 "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "file",
+                  "file": {},
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "http://localhost:8080/admin/delete_category/ADMIN",
+                  "raw": "http://localhost:8080/admin/delete_value/UNMARRIED0",
                   "protocol": "http",
                   "host": [
                     "localhost"
@@ -229,8 +269,8 @@
                   "port": "8080",
                   "path": [
                     "admin",
-                    "delete_category",
-                    "ADMIN"
+                    "delete_value",
+                    "UNMARRIED0"
                   ]
                 }
               },
@@ -269,7 +309,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"DATA ANALYST\",\r\n    \"description\": \"Responsible for Data Analytics and Reporting\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"Department Manager\",\r\n    \"description\": \"Role for all Department Manager. Department Manager signing in needs to have this role.\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -305,13 +345,13 @@
                   }
                 },
                 "url": {
-                  "raw": "{{hrms.com}}/admin/update_roles/DATA ANALYST",
+                  "raw": "{{hrms.com}}/admin/update_Roles/DATA ANALYST",
                   "host": [
                     "{{hrms.com}}"
                   ],
                   "path": [
                     "admin",
-                    "update_roles",
+                    "update_Roles",
                     "DATA ANALYST"
                   ]
                 }
@@ -325,14 +365,14 @@
                 "method": "POST",
                 "header": [],
                 "url": {
-                  "raw": "{{hrms.com}}/admin/delete_Roles/DATA ANALYST1",
+                  "raw": "{{hrms.com}}/admin/delete_Roles/DATA ANALYST",
                   "host": [
                     "{{hrms.com}}"
                   ],
                   "path": [
                     "admin",
                     "delete_Roles",
-                    "DATA ANALYST1"
+                    "DATA ANALYST"
                   ]
                 }
               },
@@ -349,13 +389,43 @@
       "item": [
         {
           "name": "AUTH/LOGIN",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ccf5ce94-8c0b-4aeb-a78d-497a0b3c855a",
+                "exec": [
+                  "const res = pm.response.json();\r",
+                  "pm.environment.set(\"token\", res.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2bbdeb54-516b-49f4-97a5-af4823c52423",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
           "id": "83d6a9ee-05bb-434f-b495-6cacf831acf5",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"username\": \"rb\",\r\n  \"password\": \"260849\"}",
+              "raw": "{\r\n  \"username\": \"aak\",\r\n  \"password\": \"260849\"\r\n  }",
               "options": {
                 "raw": {
                   "language": "json"
@@ -363,12 +433,10 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8081/auth/login",
-              "protocol": "http",
+              "raw": "{{hrms.com}}/auth/login",
               "host": [
-                "localhost"
+                "{{hrms.com}}"
               ],
-              "port": "8081",
               "path": [
                 "auth",
                 "login"
@@ -390,5 +458,37 @@
         "type": "string"
       }
     ]
-  }
+  },
+  "variable": [
+    {
+      "id": "61dc6ea1-0db8-431c-9cf6-9d195d6a008e",
+      "key": "categoryCode",
+      "value": ""
+    },
+    {
+      "id": "df450b88-729c-4040-a535-83abd522aca3",
+      "key": "displayValue",
+      "value": ""
+    },
+    {
+      "id": "6c2cb522-31d4-41ac-874d-a6c83752c7e4",
+      "key": "code",
+      "value": ""
+    },
+    {
+      "id": "b34c42db-de7c-4260-8d9a-557cc2fac38f",
+      "key": "stateIndex",
+      "value": ""
+    },
+    {
+      "id": "697fe0a1-ea49-43e3-80fc-1649478d382b",
+      "key": "locIndex",
+      "value": ""
+    },
+    {
+      "id": "2427c109-006b-4aec-b974-9421df2f4731",
+      "key": "dataIndex",
+      "value": ""
+    }
+  ]
 }
