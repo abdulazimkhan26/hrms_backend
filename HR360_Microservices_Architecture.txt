@@ -1,0 +1,611 @@
+================================================================================
+                     HR360 - MICROSERVICES ARCHITECTURE
+                         IKIGAI 4TECH | OMULUS INFOTECH
+================================================================================
+
+  CURRENT STATE  →  Monolith (Single Spring Boot Project)
+  TARGET STATE   →  Microservices (Separate Projects)
+
+================================================================================
+  HOW TO READ THIS DOCUMENT
+================================================================================
+
+  Each microservice shows:
+
+  > Service Name
+  > Port Number
+  > Technology
+  > Packages Merged From Current Project
+  > What It Handles
+
+================================================================================
+  MICROSERVICES ORDER & PACKAGE MAPPING
+================================================================================
+
+  BUILD ORDER:
+  ------------
+  Build in this exact order because each service
+  depends on the previous one.
+
+  [ 1 ] api-gateway
+  [ 2 ] auth-service
+  [ 3 ] admin-service
+  [ 4 ] employee-service
+  [ 5 ] recruitment-service
+  [ 6 ] leave-service
+  [ 7 ] training-service
+  [ 8 ] performance-service
+  [ 9 ] separation-service
+  [ 10] notification-service
+
+================================================================================
+  [ 1 ] API GATEWAY
+================================================================================
+
+  Port       :  8080
+  Technology :  Spring Boot + Spring Cloud Gateway
+  From       :  NEW PROJECT (not in current monolith)
+
+  Packages Merged
+  ---------------
+  > NONE  (brand new service)
+
+  Handles
+  -------
+  > Routes all incoming requests to correct service
+  > JWT Token validation
+  > Rate limiting
+  > Load balancing
+
+  Routes
+  ------
+  /api/auth/**          →   auth-service        (8081)
+  /api/admin/**         →   admin-service       (8082)
+  /api/employee/**      →   employee-service    (8083)
+  /api/recruitment/**   →   recruitment-service (8084)
+  /api/leave/**         →   leave-service       (8085)
+  /api/training/**      →   training-service    (8086)
+  /api/performance/**   →   performance-service (8087)
+  /api/separation/**    →   separation-service  (8088)
+  /api/notification/**  →   notification-service(8089)
+
+================================================================================
+  [ 2 ] AUTH SERVICE
+================================================================================
+
+  Port       :  8081
+  Technology :  Spring Boot
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.auth         (main auth logic)
+  > com.hrms.backend.common       (shared utilities)
+  > com.hrms.backend.config       (security config)
+
+  Handles
+  -------
+  > User Login
+  > User Registration
+  > JWT Token Generation
+  > JWT Token Validation
+  > Token Refresh
+  > Password Reset
+
+  Folder Structure
+  ----------------
+  auth-service/
+  └── com/hr360/auth/
+      ├── config/
+      │   ├── SecurityConfig.java
+      │   └── JwtConfig.java
+      ├── controller/
+      │   └── AuthController.java
+      ├── service/
+      │   └── AuthService.java
+      ├── repository/
+      │   └── UserRepository.java
+      ├── model/
+      │   └── User.java
+      ├── dto/
+      │   ├── LoginRequest.java
+      │   └── LoginResponse.java
+      ├── exception/
+      │   └── AuthException.java
+      └── AuthServiceApplication.java
+
+================================================================================
+  [ 3 ] ADMIN SERVICE
+================================================================================
+
+  Port       :  8082
+  Technology :  Spring Boot
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.admin        (admin logic)
+  > com.hrms.backend.common       (shared utilities)
+  > com.hrms.backend.config       (configurations)
+  > com.hrms.backend.core         (core shared models)
+
+  Handles
+  -------
+  > Lookup Categories
+  > Lookup Values
+  > Roles & Permissions
+  > KPIs
+  > Qualifications
+  > Position Questions
+  > Course Service Providers
+  > Training Courses
+  > BSB (Bank Details)
+  > Positions + Approval
+  > Jobs + Approval
+
+  Folder Structure
+  ----------------
+  admin-service/
+  └── com/hr360/admin/
+      ├── config/
+      │   └── SecurityConfig.java
+      ├── controller/
+      │   ├── LookupController.java
+      │   ├── RoleController.java
+      │   ├── KpiController.java
+      │   ├── QualificationController.java
+      │   ├── PositionQuestionController.java
+      │   ├── CourseProviderController.java
+      │   ├── TrainingCourseController.java
+      │   ├── BsbController.java
+      │   ├── PositionController.java
+      │   └── JobController.java
+      ├── service/
+      │   ├── LookupService.java
+      │   ├── RoleService.java
+      │   ├── KpiService.java
+      │   ├── QualificationService.java
+      │   ├── PositionQuestionService.java
+      │   ├── CourseProviderService.java
+      │   ├── TrainingCourseService.java
+      │   ├── BsbService.java
+      │   ├── PositionService.java
+      │   └── JobService.java
+      ├── repository/
+      │   ├── LookupRepository.java
+      │   ├── RoleRepository.java
+      │   ├── KpiRepository.java
+      │   ├── QualificationRepository.java
+      │   ├── PositionRepository.java
+      │   └── JobRepository.java
+      ├── model/
+      │   ├── LookupCategory.java
+      │   ├── LookupValue.java
+      │   ├── Role.java
+      │   ├── Kpi.java
+      │   ├── Qualification.java
+      │   ├── Position.java
+      │   └── Job.java
+      ├── dto/
+      │   ├── LookupRequest.java
+      │   ├── LookupResponse.java
+      │   ├── PositionRequest.java
+      │   └── PositionResponse.java
+      ├── exception/
+      │   └── AdminException.java
+      └── AdminServiceApplication.java
+
+================================================================================
+  [ 4 ] EMPLOYEE SERVICE
+================================================================================
+
+  Port       :  8083
+  Technology :  Spring Boot
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.onBoarding   (onboarding logic)
+  > com.hrms.backend.offBoarding  (offboarding logic)
+  > com.hrms.backend.core         (employee core models)
+
+  Handles
+  -------
+  > New Employee Details
+  > Employee Summary Profile
+  > IT Setup
+  > Payroll Setup
+  > Finance Action List
+  > Manager Induction Checklist
+  > Induction Training
+  > Start Off-Boarding
+  > Remove from IT Systems
+  > Finance Action List (Off-Boarding)
+  > Payroll Termination
+
+  Folder Structure
+  ----------------
+  employee-service/
+  └── com/hr360/employee/
+      ├── config/
+      │   └── SecurityConfig.java
+      ├── controller/
+      │   ├── EmployeeController.java
+      │   ├── OnboardingController.java
+      │   └── OffboardingController.java
+      ├── service/
+      │   ├── EmployeeService.java
+      │   ├── OnboardingService.java
+      │   └── OffboardingService.java
+      ├── repository/
+      │   ├── EmployeeRepository.java
+      │   ├── OnboardingRepository.java
+      │   └── OffboardingRepository.java
+      ├── model/
+      │   ├── Employee.java
+      │   ├── Onboarding.java
+      │   └── Offboarding.java
+      ├── dto/
+      │   ├── EmployeeRequest.java
+      │   └── EmployeeResponse.java
+      ├── exception/
+      │   └── EmployeeException.java
+      └── EmployeeServiceApplication.java
+
+================================================================================
+  [ 5 ] RECRUITMENT SERVICE
+================================================================================
+
+  Port       :  8084
+  Technology :  Spring Boot
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.recruitment  (all recruitment logic)
+
+  Handles
+  -------
+  > Recruitment Request
+  > Recruitment Request Approval
+  > HR Approval
+  > CV Registration
+  > HR CV Review
+  > Review Qualifying Applicants
+  > Setup 1st Round Interview
+  > First Round Interview
+  > First Round Interview Outcome
+  > Second Round Interview
+  > Job Offer & Terms
+  > Offer Acceptance
+
+  Folder Structure
+  ----------------
+  recruitment-service/
+  └── com/hr360/recruitment/
+      ├── config/
+      │   └── SecurityConfig.java
+      ├── controller/
+      │   ├── RecruitmentController.java
+      │   ├── CvController.java
+      │   ├── InterviewController.java
+      │   └── JobOfferController.java
+      ├── service/
+      │   ├── RecruitmentService.java
+      │   ├── CvService.java
+      │   ├── InterviewService.java
+      │   └── JobOfferService.java
+      ├── repository/
+      │   ├── RecruitmentRepository.java
+      │   ├── CvRepository.java
+      │   ├── InterviewRepository.java
+      │   └── JobOfferRepository.java
+      ├── model/
+      │   ├── RecruitmentRequest.java
+      │   ├── CvApplication.java
+      │   ├── Interview.java
+      │   └── JobOffer.java
+      ├── dto/
+      │   ├── RecruitmentRequestDto.java
+      │   └── RecruitmentResponseDto.java
+      ├── exception/
+      │   └── RecruitmentException.java
+      └── RecruitmentServiceApplication.java
+
+================================================================================
+  [ 6 ] LEAVE SERVICE
+================================================================================
+
+  Port       :  8085
+  Technology :  Python FastAPI
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.leave        (all leave logic)
+
+  Handles
+  -------
+  > Maintain Leave Types
+  > Maintain Public Holidays
+  > Complete Leave Form
+  > Approve Leave Request
+  > Acknowledge Leave Outcome
+  > Leave Cancellation
+
+  Folder Structure
+  ----------------
+  leave-service/
+  └── app/
+      ├── config/
+      │   └── database.py
+      ├── routes/
+      │   ├── leave.py
+      │   └── public_holidays.py
+      ├── services/
+      │   ├── leave_service.py
+      │   └── holiday_service.py
+      ├── models/
+      │   ├── leave.py
+      │   └── public_holiday.py
+      ├── schemas/
+      │   ├── leave_schema.py
+      │   └── holiday_schema.py
+      ├── exception/
+      │   └── leave_exception.py
+      └── main.py
+
+================================================================================
+  [ 7 ] TRAINING SERVICE
+================================================================================
+
+  Port       :  8086
+  Technology :  Python FastAPI
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.training     (all training logic)
+
+  Handles
+  -------
+  > Complete Training Application
+  > Approve Training Request (Line Manager)
+  > Approve Finance for External Training
+  > Approve Training Request (HR)
+  > Capture Training Results
+  > Submit Invoice
+  > Pay Invoice
+  > Acknowledge Outcome
+
+  Folder Structure
+  ----------------
+  training-service/
+  └── app/
+      ├── config/
+      │   └── database.py
+      ├── routes/
+      │   ├── training.py
+      │   └── invoice.py
+      ├── services/
+      │   ├── training_service.py
+      │   └── invoice_service.py
+      ├── models/
+      │   ├── training.py
+      │   └── invoice.py
+      ├── schemas/
+      │   ├── training_schema.py
+      │   └── invoice_schema.py
+      ├── exception/
+      │   └── training_exception.py
+      └── main.py
+
+================================================================================
+  [ 8 ] PERFORMANCE SERVICE
+================================================================================
+
+  Port       :  8087
+  Technology :  Python FastAPI
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.performance  (appraisal logic)
+  > com.hrms.backend.disciplinary (disciplinary logic)
+
+  NOTE: These two packages are merged because
+        disciplinary leads to performance action
+
+  Handles
+  -------
+  > Schedule Self-Appraisal
+  > Self-Appraisal Form
+  > Complete Appraisal
+  > Capture Appraisal Outcome
+  > Counselling Form
+  > Review Counselling Action Plan
+  > Disciplinary Action Form
+  > HR Disciplinary Advice
+  > Disciplinary Outcome
+
+  Folder Structure
+  ----------------
+  performance-service/
+  └── app/
+      ├── config/
+      │   └── database.py
+      ├── routes/
+      │   ├── appraisal.py
+      │   ├── counselling.py
+      │   └── disciplinary.py
+      ├── services/
+      │   ├── appraisal_service.py
+      │   ├── counselling_service.py
+      │   └── disciplinary_service.py
+      ├── models/
+      │   ├── appraisal.py
+      │   ├── counselling.py
+      │   └── disciplinary.py
+      ├── schemas/
+      │   ├── appraisal_schema.py
+      │   ├── counselling_schema.py
+      │   └── disciplinary_schema.py
+      ├── exception/
+      │   └── performance_exception.py
+      └── main.py
+
+================================================================================
+  [ 9 ] SEPARATION SERVICE
+================================================================================
+
+  Port       :  8088
+  Technology :  Python FastAPI
+  From       :  EXISTING PROJECT
+
+  Packages Merged
+  ---------------
+  > com.hrms.backend.seperation   (all separation logic)
+
+  Handles
+  -------
+  > Resignation
+  > Termination
+  > Absconding
+  > Contract
+  > Employee Retention
+  > HR Acceptance of Resignation
+  > Exit Interview
+  > Finalize Termination
+
+  Folder Structure
+  ----------------
+  separation-service/
+  └── app/
+      ├── config/
+      │   └── database.py
+      ├── routes/
+      │   ├── resignation.py
+      │   ├── termination.py
+      │   └── exit_interview.py
+      ├── services/
+      │   ├── resignation_service.py
+      │   ├── termination_service.py
+      │   └── exit_service.py
+      ├── models/
+      │   ├── resignation.py
+      │   ├── termination.py
+      │   └── exit_interview.py
+      ├── schemas/
+      │   ├── resignation_schema.py
+      │   └── termination_schema.py
+      ├── exception/
+      │   └── separation_exception.py
+      └── main.py
+
+================================================================================
+  [ 10 ] NOTIFICATION SERVICE
+================================================================================
+
+  Port       :  8089
+  Technology :  Python FastAPI
+  From       :  NEW PROJECT (not in current monolith)
+
+  Packages Merged
+  ---------------
+  > NONE  (brand new service)
+
+  Handles
+  -------
+  > Email on approval / decline
+  > Email on leave outcome
+  > Email on training outcome
+  > Email on disciplinary action
+  > Email on resignation
+  > Meeting request for interviews
+  > Meeting request for appraisals
+  > Meeting request for counselling
+
+  Folder Structure
+  ----------------
+  notification-service/
+  └── app/
+      ├── config/
+      │   └── email_config.py
+      ├── routes/
+      │   └── notification.py
+      ├── services/
+      │   ├── email_service.py
+      │   └── meeting_service.py
+      ├── models/
+      │   └── notification.py
+      ├── schemas/
+      │   └── notification_schema.py
+      ├── templates/
+      │   ├── approval_email.html
+      │   ├── leave_email.html
+      │   ├── training_email.html
+      │   └── resignation_email.html
+      └── main.py
+
+================================================================================
+  PACKAGE MIGRATION SUMMARY
+================================================================================
+
+  YOUR CURRENT PACKAGE       →    GOES INTO SERVICE
+  -------------------------------------------------------
+  com.hrms.backend.auth      →    auth-service
+  com.hrms.backend.admin     →    admin-service
+  com.hrms.backend.common    →    admin-service
+  com.hrms.backend.config    →    admin-service
+  com.hrms.backend.core      →    admin-service
+                                  + employee-service
+  com.hrms.backend.onBoarding→    employee-service
+  com.hrms.backend.offBoarding→   employee-service
+  com.hrms.backend.recruitment→   recruitment-service
+  com.hrms.backend.leave     →    leave-service
+  com.hrms.backend.training  →    training-service
+  com.hrms.backend.performance→   performance-service
+  com.hrms.backend.disciplinary→  performance-service
+  com.hrms.backend.seperation→    separation-service
+  (NEW)                      →    api-gateway
+  (NEW)                      →    notification-service
+
+================================================================================
+  PORT SUMMARY
+================================================================================
+
+  SERVICE                  PORT      TECHNOLOGY
+  -------------------------------------------------------
+  api-gateway              8080      Spring Boot
+  auth-service             8081      Spring Boot
+  admin-service            8082      Spring Boot
+  employee-service         8083      Spring Boot
+  recruitment-service      8084      Spring Boot
+  leave-service            8085      Python FastAPI
+  training-service         8086      Python FastAPI
+  performance-service      8087      Python FastAPI
+  separation-service       8088      Python FastAPI
+  notification-service     8089      Python FastAPI
+
+================================================================================
+  COMMUNICATION FLOW
+================================================================================
+
+  Frontend (React/Vue)
+        |
+        v
+  api-gateway (8080)
+        |
+        |──→ auth-service        (8081)  Spring Boot
+        |──→ admin-service       (8082)  Spring Boot
+        |──→ employee-service    (8083)  Spring Boot
+        |──→ recruitment-service (8084)  Spring Boot
+        |──→ leave-service       (8085)  Python
+        |──→ training-service    (8086)  Python
+        |──→ performance-service (8087)  Python
+        |──→ separation-service  (8088)  Python
+        └──→ notification-service(8089)  Python
+
+================================================================================
+                          END OF DOCUMENT
+================================================================================

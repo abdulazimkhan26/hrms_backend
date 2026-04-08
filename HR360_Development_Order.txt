@@ -1,0 +1,406 @@
+================================================================================
+                     HR360 - COMPLETE DEVELOPMENT ORDER
+                         IKIGAI 4TECH | OMULUS INFOTECH
+================================================================================
+
+  FOR EVERY STEP, FOLLOW THIS ORDER:
+  
+        [ 1 ] Create Database Table  (SQL)
+                        |
+                        v
+        [ 2 ] Build Backend API      (Node/Laravel/Python)
+                        |
+                        v
+        [ 3 ] Build Frontend UI      (React/Vue/Angular)
+
+================================================================================
+  STEP 1 — LOOKUPS                                               [ DOING NOW ]
+================================================================================
+
+  Database
+  --------
+  > Create lookup_categories table
+  > Create lookup_values table
+
+  Backend API
+  -----------
+  > GET    all categories
+  > GET    values by category
+  > POST   add new value
+  > PUT    update value
+  > DELETE soft delete value
+
+  Frontend UI
+  -----------
+  > Admin screen to manage lookup lists
+
+  Data to Add via UI
+  ------------------
+  > Department
+  > Gender
+  > Marital Status
+  > Work Type
+  > Employment Type
+  > State
+  > Position Level
+  > AQF Level
+  > Course Category
+  > Pay Frequency
+  > Pay Method
+  > Approval Status
+  > Recruitment Channel
+  > Termination Reasons
+
+================================================================================
+  STEP 2 — ROLES & USERS                                           [ NEXT ]
+================================================================================
+
+  Database
+  --------
+  > Create roles table
+  > Link role_id to users table
+
+  Backend API
+  -----------
+  > GET    all roles
+  > POST   assign role to user
+  > PUT    update role
+  > Middleware for role-based access control
+
+  Frontend UI
+  -----------
+  > Admin screen to manage roles
+  > Role assignment screen
+
+  Data to Add via UI
+  ------------------
+  > Employee
+  > HR Manager
+  > HR Clerk
+  > Line Manager
+  > Finance Manager
+  > Finance Clerk
+  > IT Clerk
+  > Payroll Clerk
+  > Training Manager
+  > Administrator
+  > Department Manager
+
+================================================================================
+  STEP 3 — MASTER DATA
+================================================================================
+
+  3.1  KPIs
+       -----
+       > Create kpis table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain KPIs)
+       > HR Admin adds data through UI
+
+  3.2  Qualifications
+       ---------------
+       > Create qualifications table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Qualifications)
+       > HR Admin adds data through UI
+
+  3.3  Position Questions
+       -------------------
+       > Create position_questions table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Position Questions)
+       > HR Admin adds data through UI
+
+  3.4  Course Service Providers
+       -------------------------
+       > Create course_service_providers table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Course Service Providers)
+       > HR Admin adds data through UI
+
+  3.5  Training Courses
+       -----------------
+       > Create training_courses table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Training Courses)
+       > HR Admin adds data through UI
+
+  3.6  BSB (Bank Details)
+       -------------------
+       > Create bsb table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain BSB)
+       > HR Admin adds data through UI
+
+================================================================================
+  STEP 4 — POSITIONS & JOBS
+================================================================================
+
+  4.1  Positions
+       ----------
+       > Create positions table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Positions)
+       > HR submits position for approval
+
+  4.2  Approve Positions
+       ------------------
+       > Build approval API
+       > Build approval UI screen
+       > HR Manager approves / declines
+
+  4.3  Jobs
+       -----
+       > Create jobs table
+       > Build API (GET, POST, PUT, DELETE)
+       > Build UI screen (Maintain Jobs)
+       > HR submits job for approval
+
+  4.4  Approve Jobs
+       -------------
+       > Build approval API
+       > Build approval UI screen
+       > HR Manager approves / declines
+
+================================================================================
+  STEP 5 — RECRUITMENT MODULE
+================================================================================
+
+  Order of Screens to Build:
+
+  [ 1 ]  Recruitment Request              > Manager / Supervisor
+            |
+            v
+  [ 2 ]  Recruitment Request Approval     > Department Manager
+            |
+            v
+  [ 3 ]  HR Approval                      > HR Manager
+            |
+            v
+  [ 4 ]  CV Registration                  > HR Clerk
+            |
+            v
+  [ 5 ]  HR CV Review                     > HR Manager
+            |
+            v
+  [ 6 ]  Review Qualifying Applicants     > Requester
+            |
+            v
+  [ 7 ]  Setup 1st Round Interview        > HR Manager
+            |
+            v
+  [ 8 ]  First Round Interview            > Interviewer
+            |
+            v
+  [ 9 ]  First Round Interview Outcome    > HR Manager
+            |
+            v
+  [ 10 ] Second Round Interview           > HR Manager
+            |
+            v
+  [ 11 ] Job Offer & Terms                > HR Manager
+            |
+            v
+  [ 12 ] Offer Acceptance                 > HR Clerk
+
+================================================================================
+  STEP 6 — ONBOARDING MODULE
+================================================================================
+
+  [ 1 ]  New Employee Details             > HR
+            |
+            |-----------------------------+------------------+
+            v                            v                  v
+  [ 2 ]  IT Setup             [ 3 ] Payroll Setup  [ 4 ] Finance Action List
+         IT Clerk                   Payroll Clerk         Finance Clerk
+            |                            |
+            v                            v
+  [ 5 ]  Manager Induction Checklist     > Line Manager
+            |
+            v
+  [ 6 ]  Induction Training              > Training Manager
+
+================================================================================
+  STEP 7 — LEAVE MODULE
+================================================================================
+
+  [ 1 ]  Maintain Leave Types             > Administrator
+            |
+            v
+  [ 2 ]  Maintain Public Holidays         > Administrator
+            |
+            v
+  [ 3 ]  Complete Leave Form              > Employee
+            |
+            v
+  [ 4 ]  Approve Leave Request            > Line Manager
+            |
+            v
+  [ 5 ]  Acknowledge Leave Outcome        > Employee
+            |
+            v
+  [ 6 ]  Leave Cancellation               > Employee
+
+================================================================================
+  STEP 8 — TRAINING MODULE
+================================================================================
+
+  [ 1 ]  Complete Training Application    > Employee
+            |
+            v
+  [ 2 ]  Approve Training Request         > Line Manager
+            |
+            v
+  [ 3 ]  Approve Finance (External)       > Finance Manager
+            |
+            v
+  [ 4 ]  Approve Training Request         > HR Manager
+            |
+            v
+  [ 5 ]  Capture Training Results         > Line Manager
+            |
+            v
+  [ 6 ]  Submit Invoice                   > Originator
+            |
+            v
+  [ 7 ]  Pay Invoice                      > Finance Manager
+            |
+            v
+  [ 8 ]  Acknowledge Outcome              > Employee
+
+================================================================================
+  STEP 9 — EMPLOYEE SUMMARY PROFILE
+================================================================================
+
+  > Build Profile Dashboard
+  > Show Leave History
+  > Show Training History
+  > Show Counselling History
+  > Show Disciplinary History
+  > Show Performance History
+  > Add Date Range Filter
+  > HR can view ANY employee profile
+  > Employee can view OWN profile only
+
+================================================================================
+  STEP 10 — COUNSELLING & DISCIPLINARY MODULE
+================================================================================
+
+  [ 1 ]  Counselling Form                 > Line Manager
+            |
+            v
+  [ 2 ]  Review Counselling Action Plan   > Line Manager
+            |
+            v
+  [ 3 ]  Disciplinary Action Form         > Line Manager
+            |
+            v
+  [ 4 ]  HR Disciplinary Advice           > HR Manager
+            |
+            v
+  [ 5 ]  Disciplinary Outcome             > HR Manager
+
+================================================================================
+  STEP 11 — PERFORMANCE MODULE
+================================================================================
+
+  [ 1 ]  Schedule Self-Appraisal          > Line Manager
+            |
+            v
+  [ 2 ]  Self-Appraisal Form              > Employee
+            |
+            v
+  [ 3 ]  Complete Appraisal               > Line Manager
+            |
+            v
+  [ 4 ]  Capture Appraisal Outcome        > Line Manager
+
+================================================================================
+  STEP 12 — SEPARATION MODULE
+================================================================================
+
+  [ 1 ]  Resignation                      > Employee
+  [ 2 ]  Termination                      > Reporting Manager
+  [ 3 ]  Absconding                       > Reporting Manager
+  [ 4 ]  Contract                         > Reporting Manager
+  [ 5 ]  Employee Retention               > HR Manager
+  [ 6 ]  HR Acceptance of Resignation     > HR Manager
+  [ 7 ]  Exit Interview                   > HR Manager
+  [ 8 ]  Finalize Termination             > HR Manager
+
+================================================================================
+  STEP 13 — OFFBOARDING MODULE
+================================================================================
+
+  [ 1 ]  Start Off-Boarding Form          > Line Manager
+            |
+            |---------------------------+
+            v                           v
+  [ 2 ]  Remove from IT Systems    [ 3 ] Finance Action List
+         IT Clerk                        Finance Clerk
+                                              |
+                                              v
+                                    [ 4 ] Payroll Termination
+                                          Payroll Clerk
+
+================================================================================
+  STEP 14 — NOTIFICATIONS & EMAILS
+================================================================================
+
+  > Email on every approval / decline
+  > Email on leave outcome
+  > Email on training outcome
+  > Email on disciplinary action
+  > Email on resignation
+  > Meeting request for interviews
+  > Meeting request for appraisals
+  > Meeting request for counselling sessions
+
+================================================================================
+  STEP 15 — DASHBOARD & REPORTS
+================================================================================
+
+  HR Metrics Dashboard
+  --------------------
+  > Cost Per Hire
+  > Turnover Rate
+  > Time to Fill
+  > Absence Rate
+  > Training Hours
+  > Performance Scores
+  > Satisfaction Rate
+  > Employee Referral Rates
+
+  Reports
+  -------
+  > Employee Summary Report
+  > Recruitment Report
+  > Training Report
+  > Leave Report
+  > Performance Report
+
+================================================================================
+  COMPLETE SUMMARY
+================================================================================
+
+  STEP  |  MODULE                    |  WHO USES IT
+  ------|----------------------------|--------------------------------
+    1   |  Lookups                   |  Admin
+    2   |  Roles & Users             |  Admin
+    3   |  Master Data               |  HR Admin
+    4   |  Positions & Jobs          |  HR
+    5   |  Recruitment               |  HR / Manager
+    6   |  Onboarding                |  HR / IT / Payroll
+    7   |  Leave                     |  Employee / Manager
+    8   |  Training                  |  Employee / HR
+    9   |  Employee Profile          |  HR / Employee
+   10   |  Counselling & Disciplinary|  Manager / HR
+   11   |  Performance               |  Employee / Manager
+   12   |  Separation                |  Employee / HR
+   13   |  Offboarding               |  Manager / IT / Payroll
+   14   |  Notifications             |  System (Automatic)
+   15   |  Dashboard & Reports       |  HR / Admin
+
+================================================================================
+                          END OF DOCUMENT
+================================================================================

@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Generated;
 import org.hibernate.generator.EventType;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "users", schema = "core")
 public class User {
@@ -37,7 +39,5 @@ public class User {
     @Getter
     @Setter
     @Column(name="roles", nullable = false)
-    private String role;
-
-
+    private UUID role;
 }

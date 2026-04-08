@@ -15,6 +15,9 @@ public class GatewayConfig {
                 .route("auth-service", r -> r
                         .path("/auth/**")
                         .uri("lb://auth-service"))
+                .route("admin-service", r -> r
+                        .path("/admin/**")
+                        .uri("lb://admin-service"))
 
                 .build();
     }

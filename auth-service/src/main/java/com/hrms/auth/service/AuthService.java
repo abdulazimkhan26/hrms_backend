@@ -2,7 +2,9 @@ package com.hrms.auth.service;
 
 import com.hrms.auth.dto.LoginRequest;
 import com.hrms.auth.dto.LoginResponse;
+import com.hrms.auth.entity.Roles;
 import com.hrms.auth.entity.User;
+import com.hrms.auth.repository.RolesRepository;
 import com.hrms.auth.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,13 @@ import java.util.Optional;
 @Service
 public class AuthService {
     private final UserRepository userRepository;
+    private final RolesRepository rolesRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(UserRepository userRepository, RolesRepository rolesRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.rolesRepository = rolesRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
@@ -35,8 +39,14 @@ public class AuthService {
             return new LoginResponse(null, "Invalid password! Try again.", null, null, false);
         }
 
+        Optional<Roles> roles = rolesRepository.findById(user.getRole());
+
+        String role_name = roles
+                .map(Roles::getName)
+                .orElse(null);
+
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", user.getRole());
+        claims.put("role", role_name);
         claims.put("username", user.getUsername());
 
 
