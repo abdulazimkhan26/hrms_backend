@@ -1,0 +1,12 @@
+$kind: http-request
+name: forgot_pw
+url: "{{hrms.com}}/auth/forgot-password"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\": \"khanazim4477@gmail.coml\"\r
+
+    }"
+order: 4119030509076564

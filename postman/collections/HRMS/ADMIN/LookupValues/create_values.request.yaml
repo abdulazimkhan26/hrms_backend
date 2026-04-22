@@ -1,0 +1,79 @@
+$kind: http-request
+url: "{{hrms.com}}/admin/create_value"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"categoryCode\": \"{{categoryCode}}\",\r
+
+    \    \"displayValue\": \"{{displayValue}}\",\r
+
+    \    \"code\": \"{{code}}\"\r
+
+    }"
+scripts:
+  - type: beforeRequest
+    code: "const data = [\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"HR\",
+      \"code\": \"HR\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Finance\",
+      \"code\": \"FINANCE\" },\r
+
+      \  { \"caegoryCode\": \"COST_CENTRE\", \"displayValue\": \"IT \",
+      \"code\": \"IT_COST_CENTRE\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Marketing\",
+      \"code\": \"MARKETING\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Sales\",
+      \"code\": \"SALES\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Operations\",
+      \"code\": \"OPERATIONS\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Research &
+      Development\", \"code\": \"RESEARCH_AND_DEVELOPMENT\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Customer
+      Service\", \"code\": \"CUSTOMER_SERVICE\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Logistics\",
+      \"code\": \"LOGISTICS\" },\r
+
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Legal\",
+      \"code\": \"LEGAL\" }\r
+
+      ];\r
+
+      \r
+
+      let index = pm.collectionVariables.get(\"dataIndex\") || 0;\r
+
+      index = parseInt(index);\r
+
+      \r
+
+      if (index >= data.length) {\r
+
+      \    index = 0;\r
+
+      }\r
+
+      \r
+
+      const current = data[index];\r
+
+      pm.collectionVariables.set(\"categoryCode\", current.categoryCode);\r
+
+      pm.collectionVariables.set(\"displayValue\", current.displayValue);\r
+
+      pm.collectionVariables.set(\"code\", current.code);\r
+
+      \r
+
+      pm.collectionVariables.set(\"dataIndex\", index + 1);"
+    language: text/javascript
+order: 2000

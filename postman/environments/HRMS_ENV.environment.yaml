@@ -1,0 +1,15 @@
+name: HRMS_ENV
+values:
+  - key: hrms.com
+    enabled: true
+    value: ''
+  - key: token
+    enabled: true
+    value: ''
+  - key: user_ID
+    enabled: true
+    value: ''
+  - key: role
+    enabled: true
+    value: ''
+color: 120

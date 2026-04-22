@@ -1,0 +1,14 @@
+$kind: http-request
+name: create_roles
+url: "{{hrms.com}}/admin/create_roles"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"SUPER_ADMIN1\",\r
+
+    \    \"description\": \"\"\r
+
+    }"
+order: 2000

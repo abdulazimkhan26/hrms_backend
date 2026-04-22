@@ -6,12 +6,19 @@ import com.hrms.admin.dto.LookUpValueRequest;
 import com.hrms.admin.dto.LookUpValueResponse;
 import com.hrms.admin.entity.LookupCategories;
 import com.hrms.admin.entity.LookupValues;
+import com.hrms.admin.projection.LookupCategoryProjection;
+import com.hrms.admin.projection.LookupValuesProjection;
 import com.hrms.admin.repository.LookupCategoriesRepository;
 import com.hrms.admin.repository.LookupValuesRepository;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class LookupService {
@@ -25,7 +32,7 @@ public class LookupService {
 
 // ---LookUpCategories---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public List<String> allCategories(){
+    public List<LookupCategoryProjection> allCategories(){
         return lookupcat_repo.findAllCodes();
     }
 
@@ -39,19 +46,19 @@ public class LookupService {
         category.setLabel(request.getLabel());
         category.setDescription(request.getDescription());
 
-        LookupCategories saved = lookupcat_repo.save(category);
+        lookupcat_repo.save(category);
         return new LookUpCategoryResponse("Category Created Successfully!", request.getCode(), request.getLabel(), OffsetDateTime.now(), true);
     }
 
-    public LookUpCategoryResponse delete_category(String code){
-        LookupCategories category = lookupcat_repo.findByCode(code).orElseThrow(()-> new RuntimeException(""));
+    public LookUpCategoryResponse delete_category(UUID id){
+        LookupCategories category = lookupcat_repo.findById(id).orElseThrow(()-> new RuntimeException("id not found!"));
         lookupcat_repo.delete(category);
 
-        return new LookUpCategoryResponse(code + "deleted successfully", "", "", OffsetDateTime.now(), true);
+        return new LookUpCategoryResponse(id + "deleted successfully", "", "", OffsetDateTime.now(), true);
     }
 
-    public LookUpCategoryResponse update_category(String code, LookUpCategoryRequest request){
-        LookupCategories category = lookupcat_repo.findByCode(code)
+    public LookUpCategoryResponse update_category(UUID id, LookUpCategoryRequest request){
+        LookupCategories category = lookupcat_repo.findById(request.getId())
                 .orElseThrow(()-> new RuntimeException(""));
 
         category.setCode(request.getCode());
@@ -60,59 +67,68 @@ public class LookupService {
 
         lookupcat_repo.save(category);
 
-        return new LookUpCategoryResponse(code + " successfully updated to " + request.getCode(), request.getCode(), request.getLabel(), OffsetDateTime.now(), true);
+        return new LookUpCategoryResponse(request.getId() + " successfully updated to " + request.getCode(), request.getCode(), request.getLabel(), OffsetDateTime.now(), true);
     }
 
 // ---LookUpValues-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public List<String> all_values(String category_code){
-        LookupCategories category = lookupcat_repo
-                .findByCode(category_code)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+    // public LookUpValueResponse getLookupValueByCode(String code) {
+    //     LookupValues lv = lookupval_repo.findByCode(code)
+    //             .orElseThrow(() -> new RuntimeException("Lookup value not found"));
 
-        return lookupval_repo.findByCategory(category);
+    //     return new LookUpValueResponse(lv.getId().toString(),OffsetDateTime.now(),true, lv.getId());
+    // }
+
+    public ResponseEntity<?> all_values(UUID category_id) {    
+        if (!lookupval_repo.existsByCategoryId(category_id)) {
+            return ResponseEntity
+                .status(400)
+                .body(new LookUpValueResponse("No existing values found for the selected category.", null, false, category_id));
+        }
+
+        List<LookupValuesProjection> values = lookupval_repo.findByCategoryId(category_id);
+        return ResponseEntity.status(200).body(values);
     }
 
-    public LookUpValueResponse create_values(LookUpValueRequest request){
+    public ResponseEntity<?> create_values(LookUpValueRequest request){
         if(lookupval_repo.existsByCode(request.getCode())){
-            return new LookUpValueResponse("The Value Code already exists!", "", OffsetDateTime.now(), false );
+            return ResponseEntity.status(400).body(new LookUpValueResponse("The Value Code already exists!", OffsetDateTime.now(), false, null));
         }
         LookupCategories category = lookupcat_repo
-                .findByCode(request.getCategoryCode())
+                .findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
         LookupValues values = new LookupValues();
-        values.setDisplay_value(request.getDisplayValue());
+        values.setDisplayValue(request.getDisplayValue());
         values.setCode(request.getCode());
-        values.setCategory(category);
-        values.setIs_active(request.is_active());
+        values.setCategoryId(request.getCategoryId());
+        values.setActive(request.getActive());
 
         LookupValues saved = lookupval_repo.save(values);
-        return new LookUpValueResponse(request.getCode() + " value successsfully added.", request.getCode(), OffsetDateTime.now(), true);
+        return ResponseEntity.status(200).body(new LookUpValueResponse(request.getCode() + " value successsfully added.", OffsetDateTime.now(), true, values.getId()));
     }
 
-    public LookUpValueResponse delete_values(String code){
-        LookupValues value = lookupval_repo.findByCode(code)
-                .orElseThrow(() -> new RuntimeException("No existing value " + code + " found!"));
+    public ResponseEntity<?> delete_values(UUID id){
+        Optional<LookupValues> value = lookupval_repo.findById(id);
+        if(value.isEmpty()) {
+          return ResponseEntity.status(400).body(new LookUpValueResponse("No existing value found!", OffsetDateTime.now(), false, null)) ;
+        }       
+        
+        lookupval_repo.delete(value.get());
 
-        lookupval_repo.delete(value);
-
-        return new LookUpValueResponse(code + " successfully deleted.", code, OffsetDateTime.now(), true) ;
+        return ResponseEntity.status(200).body(new LookUpValueResponse(value.get().getCode() + " successfully deleted.", OffsetDateTime.now(), true, id)) ;
     }
 
-    public LookUpValueResponse update_values(String code, LookUpValueRequest request){
-        LookupValues value = lookupval_repo.findByCode(code)
+    public ResponseEntity<?> update_values(UUID id, LookUpValueRequest request){
+        LookupValues value = lookupval_repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found"));
-        System.out.println(value);
 
-        value.setDisplay_value(request.getDisplayValue());
+        value.setDisplayValue(request.getDisplayValue());
         value.setCode(request.getCode());
-        value.setCategory(value.getCategory());
-        value.setIs_active(request.is_active());
+        value.setActive(request.getActive());
 
         lookupval_repo.save(value);
 
-        return new LookUpValueResponse(code + " successfully updated to " + value.getCode(), value.getCode(), OffsetDateTime.now(),true) ;
+        return ResponseEntity.status(200).body(new LookUpValueResponse( "Sucessfully Updated! ", OffsetDateTime.now(),true, value.getId())) ;
     }
-
 }

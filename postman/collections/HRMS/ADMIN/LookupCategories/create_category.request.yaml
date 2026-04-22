@@ -1,0 +1,16 @@
+$kind: http-request
+name: create_category
+url: "{{hrms.com}}/admin/create_category"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"code\": \"WORK_TYPE\",\r
+
+    \    \"label\": \"Work_Type\",\r
+
+    \    \"description\": \"This category for position_leve-related items.\"\r
+
+    }"
+order: 2000

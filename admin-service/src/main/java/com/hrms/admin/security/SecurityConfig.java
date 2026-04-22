@@ -19,6 +19,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/admin/lookupvalue/**").permitAll() // allow Feign calls
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN") // ✅ admin only
                         .anyRequest().authenticated()
                 )

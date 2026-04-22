@@ -1,0 +1,28 @@
+$kind: http-request
+name: login
+url: "{{hrms.com}}/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"username\": \"aak\",\r
+
+    \  \"password\": \"260849\"\r
+
+    \  }"
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "const res = pm.response.json();\r
+
+      console.log(res.user_ID); \r
+
+      pm.environment.set(\"user_ID\", res.user_ID);\r
+
+      pm.environment.set(\"token\", res.token);\r
+
+      pm.environment.set(\"role\", res.role);"
+    language: text/javascript
+order: 1000

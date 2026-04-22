@@ -2,6 +2,7 @@ package com.hrms.auth.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,16 +11,17 @@ import lombok.Setter;
 import org.hibernate.annotations.Generated;
 import org.hibernate.generator.EventType;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users", schema = "core")
+@Table(name = "users", schema = "admin")
 public class User {
     @Getter
+    @Setter
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
-    @Generated(event = EventType.INSERT)
-    private String id;
+    @GeneratedValue
+    private UUID id;
 
     @Getter
     @Setter
@@ -35,6 +37,26 @@ public class User {
     @Setter
     @Column(name = "password_hash", nullable = false)
     private String password_hash;
+
+    @Getter
+    @Setter
+    @Column(name="password_reset_token")
+    private String resetToken;
+
+    @Getter
+    @Setter
+    @Column(name="password_reset_expires")
+    private LocalDateTime resetExpires;
+
+    @Getter
+    @Setter
+    @Column(name="last_login")
+    private LocalDateTime lastLogin;
+
+    @Getter
+    @Setter
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @Getter
     @Setter

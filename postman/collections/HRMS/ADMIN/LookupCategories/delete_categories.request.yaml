@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/admin/delete_category/ROLE"
+method: POST
+order: 4000

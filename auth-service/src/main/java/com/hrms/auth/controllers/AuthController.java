@@ -18,16 +18,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest request) {
-        LoginResponse response = authService.loginUser(request);
-
-        if (!response.isSuccess()) {
-            // wrap whole LoginResponse (includes token, msg, etc.)
-            return ResponseEntity.status(401)
-                    .body(ApiResponse.error(401, false, response.getMsg()));
-        }
-
-        // wrap whole LoginResponse for success too
-        return ResponseEntity.ok(ApiResponse.success(200, true, response.getMsg(), response.getToken(), response.getRole()));
+    public LoginResponse login(@RequestBody LoginRequest request) {
+        return  authService.loginUser(request);
     }
 }

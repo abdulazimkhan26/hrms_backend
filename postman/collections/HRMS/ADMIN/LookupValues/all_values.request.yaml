@@ -1,0 +1,5 @@
+$kind: http-request
+name: all_values
+url: http://localhost:8080/admin/all_values/WORK_TYPE
+method: GET
+order: 1000

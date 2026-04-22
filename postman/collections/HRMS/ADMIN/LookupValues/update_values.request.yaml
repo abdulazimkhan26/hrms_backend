@@ -1,0 +1,17 @@
+$kind: http-request
+url: http://localhost:8080/admin/update_value/UNMARRIED1
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"categoryCode\": \"MARITAL_STATUS\",\r
+
+    \    \"displayValue\": \"UnMarried\",\r
+
+    \    \"code\": \"UNMARRIED\"\r
+
+    }\r
+
+    \r\n"
+order: 3000

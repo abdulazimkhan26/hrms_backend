@@ -1,0 +1,8 @@
+$kind: collection
+name: HRMS
+auth:
+  - id: 677976f4-b656-4f57-9331-66fc61813ae9
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

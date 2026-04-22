@@ -1,0 +1,35 @@
+$kind: http-request
+name: create_position
+url: http://localhost:8083/hr_core/create_position
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"positionCode\": \"POS-003\",\r
+
+    \  \"positionName\": \"Data Scientist\",\r
+
+    \  \"positionDescription\": \"Responsible for designing data pipeline and
+    data infrastructure\",\r
+
+    \  \"positionLevelCode\": \"ENTRY_LEVEL\",\r
+
+    \  \"workTypeCode\": \"FULL_TIME\",\r
+
+    \  \"salaryMinimum\": 4000,\r
+
+    \  \"salaryMaximum\": 7000,\r
+
+    \  \"contractLength\": 12,\r
+
+    \  \"weeklyHoursMin\": 40,\r
+
+    \  \"weeklyHoursMax\": 45,\r
+
+    \  \"reportsToId\": null,\r
+
+    \  \"createdBy\": \"{{user_ID}}\"\r
+
+    }"
+order: 1775755583255

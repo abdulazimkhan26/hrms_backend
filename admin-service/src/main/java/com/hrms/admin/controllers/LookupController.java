@@ -4,12 +4,13 @@ import com.hrms.admin.dto.LookUpCategoryRequest;
 import com.hrms.admin.dto.LookUpCategoryResponse;
 import com.hrms.admin.dto.LookUpValueRequest;
 import com.hrms.admin.dto.LookUpValueResponse;
+import com.hrms.admin.projection.LookupCategoryProjection;
 import com.hrms.admin.service.LookupService;
-import jakarta.ws.rs.Path;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,7 +23,7 @@ public class LookupController {
 
     // LookupValues requests -------------------------------------------------
     @GetMapping("/all_categories")
-    public ResponseEntity<List<String>> fetchcat(){
+    public ResponseEntity<List<LookupCategoryProjection>> fetchcat(){
         return ResponseEntity.status(200).body(lookupservice.allCategories());
     }
 
@@ -31,35 +32,40 @@ public class LookupController {
         return ResponseEntity.status(200).body(lookupservice.create_Category(request));
     }
 
-    @PostMapping("/delete_category/{code}")
-    public ResponseEntity<LookUpCategoryResponse> deleteCat(@PathVariable String code){
-        return ResponseEntity.status(200).body(lookupservice.delete_category(code));
+    @DeleteMapping("/delete_category/{id}")
+    public ResponseEntity<LookUpCategoryResponse> deleteCat(@PathVariable UUID id){
+        return ResponseEntity.status(200).body(lookupservice.delete_category(id));
     }
 
-    @PostMapping("/update_category/{code}")
-    public ResponseEntity<LookUpCategoryResponse> updateCat(@PathVariable String code, @RequestBody LookUpCategoryRequest request){
-        return ResponseEntity.status(200).body(lookupservice.update_category(code, request));
+    @PutMapping("/update_category/{id}")
+    public ResponseEntity<LookUpCategoryResponse> updateCat(@PathVariable UUID id, @RequestBody LookUpCategoryRequest request){
+        return ResponseEntity.status(200).body(lookupservice.update_category(id, request));
     }
 
     // LookupValues requests -------------------------------------------------
-    @GetMapping("/all_values/{category_code}")
-    public ResponseEntity<List<String>> fetchval(@PathVariable String category_code){
-        return ResponseEntity.status(200).body(lookupservice.all_values(category_code));
+    // @GetMapping("/lookupvalue/{code}")
+    // public LookUpValueResponse getLookupValueByCode(@PathVariable String code) {
+    //     return lookupservice.getLookupValueByCode(code);
+    // }
+
+    @GetMapping("/all_values/{category_id}")
+    public ResponseEntity<?> fetchval(@PathVariable UUID category_id) {
+        return lookupservice.all_values(category_id);
     }
 
     @PostMapping("/create_value")
-    public ResponseEntity<LookUpValueResponse> createVal(@RequestBody LookUpValueRequest request){
-        return ResponseEntity.status(200).body(lookupservice.create_values(request));
+    public ResponseEntity<?> createVal(@RequestBody LookUpValueRequest request){
+        return lookupservice.create_values(request);
     }
 
-    @PostMapping("/update_value/{code}")
-    public ResponseEntity<LookUpValueResponse> updateVal(@PathVariable String code, @RequestBody LookUpValueRequest request){
-        return ResponseEntity.status(200).body(lookupservice.update_values(code, request));
+    @PutMapping("/update_value/{id}")
+    public ResponseEntity<?> updateVal(@PathVariable UUID id, @RequestBody LookUpValueRequest request){
+        return lookupservice.update_values(id, request);
     }
 
-    @PostMapping("/delete_value/{code}")
-    public ResponseEntity<LookUpValueResponse> deleteVal(@PathVariable String code){
-        return ResponseEntity.status(200).body(lookupservice.delete_values(code));
+    @DeleteMapping("/delete_value/{id}")
+    public ResponseEntity<?> deleteVal(@PathVariable UUID id){
+        return lookupservice.delete_values(id);
     }
 
 }

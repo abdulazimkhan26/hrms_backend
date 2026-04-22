@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{hrms.com}}/admin/update_category/ROLE"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"code\": \"ROLE\",\r
+
+    \    \"label\": \"Role\",\r
+
+    \    \"description\": \"Thvvdssdsdvsde category for role-related items.\"\r
+
+    }"
+order: 3000

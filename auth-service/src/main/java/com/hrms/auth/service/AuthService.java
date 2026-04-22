@@ -8,9 +8,13 @@ import com.hrms.auth.repository.RolesRepository;
 import com.hrms.auth.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -30,13 +34,13 @@ public class AuthService {
         Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
         if(optionalUser.isEmpty()){
-            return new LoginResponse(null, "Username doesn't exist! Try with a valid username.", null, null, false);
+            return new LoginResponse(null, "Username doesn't exist! Try with a valid username.", null, null,null, false);
         }
 
         User user = optionalUser.get();
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword_hash())) {
-            return new LoginResponse(null, "Invalid password! Try again.", null, null, false);
+            return new LoginResponse(null, "Invalid password! Try again.", null,null, null, false);
         }
 
         Optional<Roles> roles = rolesRepository.findById(user.getRole());
@@ -45,15 +49,21 @@ public class AuthService {
                 .map(Roles::getName)
                 .orElse(null);
 
+        UUID user_ID = user.getId();
+
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role_name);
+        claims.put("userID", user_ID);
         claims.put("username", user.getUsername());
 
 
         String token = jwtService.generateToken(user.getUsername(), claims);
-
         String role = jwtService.returnClaims(token);
 
-        return new LoginResponse(user.getUsername(), "Login Successful!", token, role, true);
+        user.setLastLogin(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        return new LoginResponse(user.getUsername(), "Login Successful!", token, user_ID, role, true);
     }
 }

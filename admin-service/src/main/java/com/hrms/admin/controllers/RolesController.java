@@ -3,6 +3,7 @@ package com.hrms.admin.controllers;
 import com.hrms.admin.dto.RolesRequest;
 import com.hrms.admin.dto.RolesResponse;
 import com.hrms.admin.entity.Roles;
+import com.hrms.admin.projection.RoleProjection;
 import com.hrms.admin.service.RolesService;
 import jakarta.ws.rs.GET;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,7 +23,7 @@ public class RolesController {
     }
 
     @GetMapping("/allRoles")
-    public ResponseEntity<List<String>> all_Roles(){
+    public ResponseEntity<List<RoleProjection>> all_Roles(){
         return ResponseEntity.status(200).body(rolesService.allRoles());
     }
 
@@ -30,13 +32,13 @@ public class RolesController {
         return ResponseEntity.status(200).body(rolesService.createRoles(request));
     }
 
-    @PostMapping("/update_Roles/{name}")
-    public ResponseEntity<RolesResponse> update_Roles(@PathVariable String name, @RequestBody RolesRequest request){
-        return ResponseEntity.status(200).body(rolesService.updateRoles(name, request));
+    @PutMapping("/update_Roles/{id}")
+    public ResponseEntity<RolesResponse> update_Roles(@PathVariable UUID id, @RequestBody RolesRequest request){
+        return ResponseEntity.status(200).body(rolesService.updateRoles(id, request));
     }
 
-    @PostMapping("/delete_Roles/{name}")
-    public ResponseEntity<RolesResponse> delete_Roles(@PathVariable String name){
-        return ResponseEntity.status(200).body(rolesService.deleteRoles(name));
+    @DeleteMapping("/delete_Roles/{id}")
+    public ResponseEntity<RolesResponse> delete_Roles(@PathVariable UUID id){
+        return ResponseEntity.status(200).body(rolesService.deleteRoles(id));
     }
 }
