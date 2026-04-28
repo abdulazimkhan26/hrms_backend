@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/qualifications/deleteQualification/c6875a68-36e1-4a6d-8cfd-c0ba512deb61"
+method: DELETE
+order: 4000

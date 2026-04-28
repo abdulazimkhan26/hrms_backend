@@ -16,35 +16,25 @@ scripts:
   - type: beforeRequest
     code: "const data = [\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"HR\",
-      \"code\": \"HR\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"HR\", \"code\": \"HR\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Finance\",
-      \"code\": \"FINANCE\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Finance\", \"code\": \"FINANCE\" },\r
 
-      \  { \"caegoryCode\": \"COST_CENTRE\", \"displayValue\": \"IT \",
-      \"code\": \"IT_COST_CENTRE\" },\r
+      \  { \"caegoryCode\": \"COST_CENTRE\", \"displayValue\": \"IT \", \"code\": \"IT_COST_CENTRE\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Marketing\",
-      \"code\": \"MARKETING\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Marketing\", \"code\": \"MARKETING\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Sales\",
-      \"code\": \"SALES\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Sales\", \"code\": \"SALES\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Operations\",
-      \"code\": \"OPERATIONS\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Operations\", \"code\": \"OPERATIONS\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Research &
-      Development\", \"code\": \"RESEARCH_AND_DEVELOPMENT\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Research & Development\", \"code\": \"RESEARCH_AND_DEVELOPMENT\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Customer
-      Service\", \"code\": \"CUSTOMER_SERVICE\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Customer Service\", \"code\": \"CUSTOMER_SERVICE\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Logistics\",
-      \"code\": \"LOGISTICS\" },\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Logistics\", \"code\": \"LOGISTICS\" },\r
 
-      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Legal\",
-      \"code\": \"LEGAL\" }\r
+      \  { \"categoryCode\": \"COST_CENTRE\", \"displayValue\": \"Legal\", \"code\": \"LEGAL\" }\r
 
       ];\r
 

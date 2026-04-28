@@ -1,5 +1,4 @@
 $kind: http-request
-name: login
 url: "{{hrms.com}}/auth/login"
 method: POST
 body:
@@ -17,9 +16,7 @@ scripts:
   - type: afterResponse
     code: "const res = pm.response.json();\r
 
-      console.log(res.user_ID); \r
-
-      pm.environment.set(\"user_ID\", res.user_ID);\r
+      pm.environment.set(\"user_ID\",res.user_ID)\r
 
       pm.environment.set(\"token\", res.token);\r
 

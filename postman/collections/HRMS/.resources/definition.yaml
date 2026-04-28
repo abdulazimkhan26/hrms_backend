@@ -1,7 +1,6 @@
 $kind: collection
-name: HRMS
 auth:
-  - id: 677976f4-b656-4f57-9331-66fc61813ae9
+  - id: 2d62becf-37e2-4e90-81d7-3955583648d4
     type: bearer
     name: bearer auth
     credentials:

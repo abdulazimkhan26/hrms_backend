@@ -1,154 +1,104 @@
 package com.hrms.hrCore.entity;
 
-import com.hrms.hrCore.entity.LookupValues;
-import com.hrms.hrCore.entity.Users;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "jobs", schema = "core")
 public class Jobs {
     @Id
     @GeneratedValue
-    @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    @Getter
-    @Setter
     @Column(name = "job_code", nullable = false, unique = true)
-    private String job_code;
+    private String jobCode;
 
-    @Getter
-    @Setter
     @Column(name = "job_title", nullable = false, unique = true)
-    private String job_title;
+    private String jobTitle;
 
-    @Getter
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false, foreignKey = @ForeignKey(name = "jobs_position_id_fkey"))
-    private Positions positions;
+    private Positions positionId;
 
-    @Getter
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reports_to_job_id", foreignKey = @ForeignKey(name = "jobs_reports_to_job_id_fkey"))
-    private Jobs reports_toJob;
+    private Jobs reportsToJobId;
 
-    @Getter
-    @Setter
     @Column(name = "salary", precision = 14, scale = 2)
     private BigDecimal salary;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_type_id", foreignKey = @ForeignKey(name = "jobs_work_type_id_fkey"))
-    private LookupValues workType;
+    @Column(name = "work_type_id", nullable=false)
+    private UUID workTypeId;
 
-    @Getter
-    @Setter
     @Column(name = "contract_length")
-    private String contract_length;
+    private String contractLength;
 
-    @Getter
-    @Setter
     @Column(name = "weekly_hours", precision = 5, scale = 2)
-    private BigDecimal weekly_hours;
+    private BigDecimal weeklyHours;
 
-    @Getter
-    @Setter
     @Column(name = "start_date", nullable = false)
-    private OffsetDateTime start_date;
+    private LocalDateTime startDate;
 
-    @Getter
-    @Setter
     @Column(name = "end_date")
-    private OffsetDateTime end_date;
+    private LocalDateTime endDate;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "state_id", foreignKey = @ForeignKey(name = "jobs_state_id_fkey"))
-    private LookupValues state;
+    @Column(name = "state_id")
+    private UUID stateId;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", foreignKey = @ForeignKey(name = "jobs_location_id_fkey"))
-    private LookupValues location;
+    @Column(name = "location_id")
+    private UUID locationId;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "jobs_company_id_fkey"))
-    private LookupValues company;
+    @Column(name = "company_id")
+    private UUID companyId;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "jobs_department_id_fkey"))
-    private LookupValues department;
+    @Column(name = "department_id")
+    private UUID departmentId;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cost_centre_id", foreignKey = @ForeignKey(name = "jobs_cost_centre_id_fkey"))
-    private LookupValues costCentre;
+    @Column(name = "cost_centre_id")
+    private UUID costCentreId;
 
-    @Getter
-    @Setter
     @ColumnDefault("DRAFT")
     @Column(name = "status", nullable = false)
     private String status;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "approved_by", foreignKey = @ForeignKey(name = "jobs_approved_by_fkey"))
-    private Users approvedBy;
+    @Column(name = "approved_by")
+    private UUID approvedBy;
 
-    @Getter
-    @Setter
     @Column(name = "approved_at")
-    private OffsetDateTime approved_at;
+    private LocalDateTime approved_at;
 
-    @Getter
-    @Setter
-    @Lob
     @Column(name = "decline_reason")
-    private String decline_reason;
+    private String declineReason;
 
-    @Getter
-    @Setter
     @ColumnDefault("true")
     @Column(name = "is_active", nullable = false)
-    private boolean is_active;
+    private Boolean active;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "created_by", nullable = false, foreignKey = @ForeignKey(name = "jobs_created_by_fkey"))
-    private Users createdBy;
+    @Column (name = "created_by", nullable = false)
+    private UUID createdBy;
 
-    @Getter
-    @Setter
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime created_at;
 
-    @Getter
-    @Setter
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updated_at;

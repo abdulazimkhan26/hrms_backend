@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/kpis/deleteKpi/034b52df-7c40-457f-b65c-f37223c25cac"
+method: DELETE
+order: 4000

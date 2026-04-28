@@ -1,3 +1,8 @@
 $kind: collection
-name: HR_CORE
-order: 4220141628817407
+auth:
+  - id: e3fe569d-aa20-463d-96cb-0c49dcb64c2b
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"
+order: 3000

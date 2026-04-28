@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{hrms.com}}/core/qualifications/createQualification"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"qualificationCode\": \"QUAL-002\",\r
+
+    \  \"qualificationName\": \"Bachelor of Computer Science specialism in Data Analytics\",\r
+
+    \  \"qualificationDescription\": \"An undergraduate degree focusing on computer science fundamentals\",\r
+
+    \  \"aqfLevelId\": \"20b7cdc3-1a0f-40ef-b8ff-ec27d25197ff\",\r
+
+    \  \"createdBy\": \"67091040-285c-4ba2-8343-86d52bbd490b\"\r
+
+    }"
+order: 2000

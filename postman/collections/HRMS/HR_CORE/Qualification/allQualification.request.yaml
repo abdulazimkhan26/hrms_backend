@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/qualifications/allQualifications"
+method: GET
+order: 1000

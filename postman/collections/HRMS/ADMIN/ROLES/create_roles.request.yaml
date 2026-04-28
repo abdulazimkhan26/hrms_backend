@@ -1,5 +1,4 @@
 $kind: http-request
-name: create_roles
 url: "{{hrms.com}}/admin/create_roles"
 method: POST
 body:

@@ -1,5 +1,4 @@
 $kind: http-request
-name: delete_roles
 url: "{{hrms.com}}/admin/delete_Roles/SUPER_ADMIN1"
 method: DELETE
 order: 4000

@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>core_hr-service</artifactId>
+    <artifactId>core-hr-service</artifactId>
     <name>HR CORE SERVICE</name>
 
     <dependencies>

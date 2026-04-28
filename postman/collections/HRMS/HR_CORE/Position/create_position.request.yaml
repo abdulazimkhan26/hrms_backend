@@ -1,5 +1,4 @@
 $kind: http-request
-name: create_position
 url: http://localhost:8083/hr_core/create_position
 method: POST
 body:
@@ -10,8 +9,7 @@ body:
 
     \  \"positionName\": \"Data Scientist\",\r
 
-    \  \"positionDescription\": \"Responsible for designing data pipeline and
-    data infrastructure\",\r
+    \  \"positionDescription\": \"Responsible for designing data pipeline and data infrastructure\",\r
 
     \  \"positionLevelCode\": \"ENTRY_LEVEL\",\r
 
@@ -32,4 +30,4 @@ body:
     \  \"createdBy\": \"{{user_ID}}\"\r
 
     }"
-order: 1775755583255
+order: 1000

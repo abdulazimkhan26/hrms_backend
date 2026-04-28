@@ -8,8 +8,6 @@ import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Generated;
-import org.hibernate.generator.EventType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

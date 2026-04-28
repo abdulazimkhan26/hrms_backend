@@ -1,5 +1,4 @@
 $kind: http-request
-name: forgot_pw
 url: "{{hrms.com}}/auth/forgot-password"
 method: POST
 body:
@@ -9,4 +8,4 @@ body:
     \    \"email\": \"khanazim4477@gmail.coml\"\r
 
     }"
-order: 4119030509076564
+order: 2000

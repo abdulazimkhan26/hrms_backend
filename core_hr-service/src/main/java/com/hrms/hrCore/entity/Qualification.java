@@ -1,68 +1,59 @@
 package com.hrms.hrCore.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
+@Builder
+@Getter
+@Setter
 @Table(name = "qualifications", schema = "core")
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicUpdate
 public class Qualification {
-
+    
     @Id
     @GeneratedValue
-    @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
-
-    @Getter
-    @Setter
+    
     @Column(name = "qualification_code", nullable = false, unique = true)
-    private String qualification_code;
-
-    @Getter
-    @Setter
+    private String qualificationCode;
+    
     @Column(name = "qualification_name", nullable = false)
-    private String qualification_name;
-
-    @Getter
-    @Setter
-    @Lob
+    private String qualificationName;
+    
     @Column(name = "qualification_description", nullable = false)
-    private String qualification_description;
-
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "aqf_level_id", nullable = false, foreignKey = @ForeignKey(name = "qualifications_aqf_level_id_fkey"))
-    private LookupValues lkv;
-
-    @Getter
-    @Setter
+    private String qualificationDescription;
+    
+    @Column(name = "aqf_level_id", nullable = false)
+    private UUID aqfLevelId;
+    
     @Column(name = "is_active", nullable = false)
-    private boolean is_active;
-
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "created_by", nullable = false, foreignKey = @ForeignKey(name = "qualifications_created_by_fkey"))
-    private Users users;
-
-    @Getter
-    @Setter
+    @Builder.Default
+    private Boolean active = true;
+    
+    @Column (name = "created_by", nullable = false)
+    private UUID createdBy;
+    
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
-    private OffsetDateTime created_at;
-
-    @Getter
-    @Setter
+    private OffsetDateTime createdAt;    
+    
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updated_at;
-
+    private OffsetDateTime updatedAt;
 }

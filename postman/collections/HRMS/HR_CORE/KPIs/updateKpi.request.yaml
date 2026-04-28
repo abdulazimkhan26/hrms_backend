@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{hrms.com}}/core/kpis/updateKpi/034b52df-7c40-457f-b65c-f37223c25cac"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \    \"kpiCode\": \"KPI-005\",\r
+
+    \    \"kpiName\": \"Customer Satisfaction Score\",\r
+
+    \    \"kpiDescription\": \"Measures overall customer satisfaction based on survey feedback\"\r
+
+    }"
+order: 3000

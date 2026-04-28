@@ -1,5 +1,4 @@
 $kind: http-request
-name: create_category
 url: "{{hrms.com}}/admin/create_category"
 method: POST
 body:

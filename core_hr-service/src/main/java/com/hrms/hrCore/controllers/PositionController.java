@@ -1,26 +1,41 @@
 package com.hrms.hrCore.controllers;
 
 import com.hrms.hrCore.dtos.requests.PositionRequest;
-import com.hrms.hrCore.dtos.responses.PositionResponse;
 import com.hrms.hrCore.service.PositionService;
+
+import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/hr_core")
+@RequestMapping("/core/positions")
+@RequiredArgsConstructor
 public class PositionController {
-    private PositionService positionService;
+    private final PositionService positionService;
 
-    public PositionController(PositionService positionService){
-        this.positionService = positionService;
+    @GetMapping("/allPositions")
+    public ResponseEntity<?> allPos(){
+        return ResponseEntity.status(200).body(positionService.allPositions());
     }
 
-    @PostMapping("/create_position")
-    public ResponseEntity<PositionResponse> createPos(@RequestBody PositionRequest request){
+    @PostMapping("/createPosition")
+    public ResponseEntity<?> createPos(@RequestBody PositionRequest request){
         return ResponseEntity.status(200).body(positionService.createPositions(request));
     }
+
+    @DeleteMapping("/deletePosition/{id}")
+    public ResponseEntity<?> deletePos(@PathVariable UUID id){
+        return ResponseEntity.status(200).body(positionService.deletePositions(id));
+    }
+
+
 }

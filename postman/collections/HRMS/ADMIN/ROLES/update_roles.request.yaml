@@ -1,5 +1,4 @@
 $kind: http-request
-name: update_roles
 url: "{{hrms.com}}/admin/update_Roles/EMPLOYE"
 method: PUT
 body:

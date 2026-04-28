@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{hrms.com}}/core/kpis/createKpi"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \r
+
+    \  \"kpiCode\": \"KPI-005\",\r
+
+    \  \"kpiName\": \"Customer Satisfaction Score\",\r
+
+    \  \"kpiDescription\": \"Measures overall customer satisfaction based on survey feedback\",\r
+
+    \  \"createdBy\": \"67091040-285c-4ba2-8343-86d52bbd490b\"\r
+
+    }"
+order: 2000

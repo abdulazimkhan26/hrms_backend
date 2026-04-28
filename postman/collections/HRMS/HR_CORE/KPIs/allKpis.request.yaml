@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/kpis/allKpis"
+method: GET
+order: 1000

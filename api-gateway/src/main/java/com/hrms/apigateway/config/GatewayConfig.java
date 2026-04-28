@@ -22,9 +22,9 @@ public class GatewayConfig {
                 .route("admin-service", r -> r
                         .path("/admin/**")
                         .uri("lb://admin-service"))
-                .route("core_hr-service", r -> r
-                        .path("/hr/**")
-                        .uri("lb://core_hr-service"))
+                .route("core-hr-service", r -> r
+                        .path("/core/**")
+                        .uri("lb://core-hr-service"))
                 .build();
     }
 
