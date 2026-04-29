@@ -1,4 +1,4 @@
 $kind: http-request
-url: http://localhost:8080/admin/all_values/WORK_TYPE
+url: http://localhost:8080/admin/all_values/2d58c9a4-0199-44b4-bc4f-63aad056ac3b
 method: GET
 order: 1000

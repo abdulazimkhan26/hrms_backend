@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{hrms.com}}/core/CSP/updateCsp/47e18c16-b3ab-4713-886a-783565840638"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"providerNumber\": \"CSP-MY-002\",\r
+
+    \  \"name\": \"Global Skills Academy\",\r
+
+    \  \"contactPerson\": \"Nur Aisyah\",\r
+
+    \  \"telephone\": \"+60 12-3456789\",\r
+
+    \  \"address\": \"Petaling Jaya, Selangor, Malaysia\",\r
+
+    \  \"email\": \"gsa@outlook.com.my\",\r
+
+    \  \"active\": \"false\"\r
+
+    }"
+order: 3000

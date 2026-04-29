@@ -5,9 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.hrms.hrCore.ErrorHandling.ResourceNotFoundException;
 import com.hrms.hrCore.dtos.requests.KpiRequest;
 import com.hrms.hrCore.entity.Kpis;
 import com.hrms.hrCore.repository.KpiRepository;
@@ -22,7 +24,7 @@ public class KpiService {
     public ResponseEntity<?> allKpis(){
         List<Kpis> kpis = kpi_repo.findAll();
         if(kpis.isEmpty()){
-           return ResponseEntity.status(404).body("No existing Kpis records.");
+           throw new ResourceNotFoundException("No KPI records are currently available.");
         }
            return ResponseEntity.status(200).body(kpis);
     }
@@ -30,7 +32,7 @@ public class KpiService {
     public ResponseEntity<?> createKpi(KpiRequest req){
         Optional<Kpis> kpis = kpi_repo.findByKpiCode(req.getKpiCode());
         if(kpis.isPresent()){
-            return ResponseEntity.status(404).body("Kpi Code already exixsts. Please enter a unique KpiCode.");
+           throw new DataIntegrityViolationException(req.getKpiCode() + " already exists. Please use a unique KPI code.");
         }
         
         Kpis kpi = Kpis.builder()
@@ -48,7 +50,7 @@ public class KpiService {
     public ResponseEntity<?> updateKpi(UUID id, KpiRequest req){
         Optional<Kpis> kpi = kpi_repo.findById(id);
         if(kpi.isEmpty()){
-          return ResponseEntity.status(404).body("Kpi doesn't exist!");      
+           throw new ResourceNotFoundException("Kpi doesn't exists!");
         }
 
         Kpis kpis = kpi.get();
@@ -80,7 +82,7 @@ public class KpiService {
     public ResponseEntity<?> deleteKpis(UUID id){
         Optional<Kpis> kpi = kpi_repo.findById(id);
         if(kpi.isEmpty()){
-          return ResponseEntity.status(404).body("Kpi doesn't exist!");      
+           throw new ResourceNotFoundException("Kpi doesn't exists!");
         }
         kpi_repo.delete(kpi.get());
 

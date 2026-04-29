@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{hrms.com}}/core/CSP/createCsp"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"providerNumber\": \"CSP-MY-003\",\r
+
+    \  \"name\": \"Global Skills Academy\",\r
+
+    \  \"contactPerson\": \"Nur Aisyah\",\r
+
+    \  \"telephone\": \"+60 12-3456789\",\r
+
+    \  \"address\": \"Petaling Jaya, Selangor, Malaysia\",\r
+
+    \  \"email\": \"invalid-email-format\",\r
+
+    \  \"createdBy\": \"67091040-285c-4ba2-8343-86d52bbd490b\"\r
+
+    }"
+order: 2000

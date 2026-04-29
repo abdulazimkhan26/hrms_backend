@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/CSP/deleteCsp/47e18c16-b3ab-4713-886a-783565840638"
+method: DELETE
+order: 4000

@@ -7,6 +7,7 @@ workspace:
 cloudResources:
   collections:
     ..\postman\collections\HRMS: 38967724-13f41499-7c1a-4909-ab7a-47e2a37068ec
+    ..\postman\collections\VMS: 38967724-670cdb72-bfce-4741-8b13-567e05821e3d
 
 # All resources in the `postman/` folder are automatically registered in Local View.
 # Point to additional files outside the `postman/` folder to register them individually. Example:

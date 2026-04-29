@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{hrms.com}}/core/positions/allPositions"
+method: GET
+order: 2000

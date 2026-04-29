@@ -20,6 +20,8 @@ public class PositionRequest {
     private String contractLength;
     private BigDecimal weeklyHoursMin;
     private BigDecimal weeklyHoursMax;
-    private UUID reportsToId;           
+    private UUID reportsToId;         
+    private Boolean active;
+    private String status;  
     private String createdBy;             
 }

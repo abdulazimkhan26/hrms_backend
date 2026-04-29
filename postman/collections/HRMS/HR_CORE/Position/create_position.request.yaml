@@ -1,33 +1,35 @@
 $kind: http-request
-url: http://localhost:8083/hr_core/create_position
+url: "{{hrms.com}}/core/positions/createPosition"
 method: POST
 body:
   type: json
-  content: "{\r
+  content: "\r
 
-    \  \"positionCode\": \"POS-003\",\r
+    \ {\r
 
-    \  \"positionName\": \"Data Scientist\",\r
+    \      \"positionCode\": \"POS-005\",\r
 
-    \  \"positionDescription\": \"Responsible for designing data pipeline and data infrastructure\",\r
+    \      \"positionName\": \"Frontend Developer\",\r
 
-    \  \"positionLevelCode\": \"ENTRY_LEVEL\",\r
+    \      \"positionDescription\": \"Builds and maintains user interfaces using modern web technologies.\",\r
 
-    \  \"workTypeCode\": \"FULL_TIME\",\r
+    \      \"positionLevelId\": \"c3ac5092-c5eb-4c91-accf-a06cc2c716b9\",\r
 
-    \  \"salaryMinimum\": 4000,\r
+    \      \"salaryMinimum\": 3500.00,\r
 
-    \  \"salaryMaximum\": 7000,\r
+    \      \"salaryMaximum\": 6000.00,\r
 
-    \  \"contractLength\": 12,\r
+    \      \"workTypeId\": \"8deaeedd-f3ae-471a-81ac-4e18e47814ca\",\r
 
-    \  \"weeklyHoursMin\": 40,\r
+    \      \"contractLength\": \"24\",\r
 
-    \  \"weeklyHoursMax\": 45,\r
+    \      \"weeklyHoursMin\": 38.00,\r
 
-    \  \"reportsToId\": null,\r
+    \      \"weeklyHoursMax\": 40.00,\r
 
-    \  \"createdBy\": \"{{user_ID}}\"\r
+    \      \"reportsTo\": \"c0a50d53-8ae0-4fea-bdd2-761a3619ac67\",\r
 
-    }"
+    \      \"createdBy\": \"67091040-285c-4ba2-8343-86d52bbd490b\"\r
+
+    \    }"
 order: 1000

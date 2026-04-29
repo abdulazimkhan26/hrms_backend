@@ -5,9 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.hrms.hrCore.ErrorHandling.ResourceNotFoundException;
 import com.hrms.hrCore.dtos.requests.QualificationRequest;
 import com.hrms.hrCore.entity.Qualification;
 import com.hrms.hrCore.repository.QualificationRepository;
@@ -22,8 +24,7 @@ public class QualificationService {
     public ResponseEntity<?> allQualifications(){
         List<Qualification> qual = qualification_repo.findAll();  
         if(qual.isEmpty()){
-          return ResponseEntity.status(404).body("No records found for Qualifications");
-
+          throw new ResourceNotFoundException("No records found for Qualifications");
         }      
         return ResponseEntity.status(200).body(qual);
     }        
@@ -32,7 +33,7 @@ public class QualificationService {
         Optional<Qualification> qual = qualification_repo.findByQualificationCode(request.getQualificationCode());
 
         if(!qual.isEmpty()){
-            return ResponseEntity.status(404).body("The Qualification Code already exists. Please change it.");
+            throw new DataIntegrityViolationException(request.getQualificationCode() + "already exists. Please enter a unique code.");
         }
 
         Qualification qualification = Qualification.builder()
@@ -51,8 +52,15 @@ public class QualificationService {
     public ResponseEntity<?> updateQualifications(UUID id, QualificationRequest request){
         Optional<Qualification> qual = qualification_repo.findById(id);
         if(qual.isEmpty()){
-            return ResponseEntity.status(404).body("No existing qualification!");
+          throw new ResourceNotFoundException("Qualification doesn't exist.");
         }
+
+        qualification_repo.findByQualificationCode(request.getQualificationCode())
+            .ifPresent(p -> {
+                if (!p.getId().equals(id)) {
+                    throw new DataIntegrityViolationException(request.getQualificationCode() + " already exists! Please use another code.");
+                }
+            });
 
         Qualification qualification = qual.get();
         boolean isUpdated = false;
@@ -87,6 +95,10 @@ public class QualificationService {
 
     public ResponseEntity<?> deleteQualification(UUID id){
         Optional<Qualification> qual = qualification_repo.findById(id);
+        if(qual.isEmpty()){
+          throw new ResourceNotFoundException("Qualification doesn't exist.");
+        }
+        
         Qualification qualification = qual.get();
         qualification_repo.delete(qualification);
         return ResponseEntity.status(200).body("Qualification deleted Successfully!");

@@ -5,9 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.hrms.hrCore.ErrorHandling.ResourceNotFoundException;
 import com.hrms.hrCore.dtos.requests.CourseServiceProvidersRequest;
 import com.hrms.hrCore.entity.CourseServiceProviders;
 import com.hrms.hrCore.entity.Kpis;
@@ -22,7 +24,7 @@ public class CourseServiceProvidersService {
 
     public ResponseEntity<?> allCsps(){
         List<CourseServiceProviders> csp = csp_repo.findAll();
-        if(csp.isEmpty()){return ResponseEntity.status(200).body("No existing Course Service Providers!");}
+        if(csp.isEmpty()){throw new ResourceNotFoundException("No existing Course Service Providers!");}
         return ResponseEntity.status(200).body(csp);
     }
 
@@ -30,10 +32,10 @@ public class CourseServiceProvidersService {
         Optional<CourseServiceProviders> csp = csp_repo.findByname(req.getName());
         Optional<CourseServiceProviders> csp1 = csp_repo.findByproviderNumber(req.getProviderNumber());
         if(csp.isPresent()){
-           return ResponseEntity.status(200).body(req.getName() + "already exists!");
+           throw new DataIntegrityViolationException(req.getName() + "already exists!");
         }
         if(csp1.isPresent()){
-           return ResponseEntity.status(200).body(req.getProviderNumber() + "already exists!");
+           throw new DataIntegrityViolationException(req.getProviderNumber() + "already exists!");
         }
         CourseServiceProviders CSP = CourseServiceProviders.builder()
                                      .providerNumber(req.getProviderNumber())
@@ -53,8 +55,22 @@ public class CourseServiceProvidersService {
     public ResponseEntity<?> updateCsp(UUID id, CourseServiceProvidersRequest req){
         Optional<CourseServiceProviders> csp = csp_repo.findById(id);
         if(csp.isEmpty()){
-        return ResponseEntity.status(200).body("No selected CSP found!");           
+            throw new ResourceNotFoundException("No CSP found!");        
         }
+
+        csp_repo.findByproviderNumber(req.getProviderNumber())
+            .ifPresent(p -> {
+                if (!p.getId().equals(id)) {
+                    throw new DataIntegrityViolationException(req.getProviderNumber() + " already exists! Please use another provider number.");
+                }
+            });
+
+        csp_repo.findByname(req.getName())
+            .ifPresent(p -> {
+                if (!p.getId().equals(id)) {
+                    throw new DataIntegrityViolationException(req.getName() + " already exists! Please use another name.");
+                }
+            });
 
         CourseServiceProviders CSP = csp.get();
         Boolean isUpdated = false;
@@ -105,11 +121,10 @@ public class CourseServiceProvidersService {
     public ResponseEntity<?> deleteCsp(UUID id){
         Optional<CourseServiceProviders> csp = csp_repo.findById(id);
         if(csp.isEmpty()){
-        return ResponseEntity.status(200).body("Invalid CSP id!");           
+            throw new ResourceNotFoundException("No CSP found!");       
         }        
 
         csp_repo.delete(csp.get());
-
         return ResponseEntity.status(200).body("CSP deleted sucessfully.");
 
     }

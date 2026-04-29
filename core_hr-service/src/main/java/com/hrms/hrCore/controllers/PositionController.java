@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,10 +33,13 @@ public class PositionController {
         return ResponseEntity.status(200).body(positionService.createPositions(request));
     }
 
+    @PutMapping("/updatePosition/{id}")
+    public ResponseEntity<?> updatePos(@PathVariable UUID id, @RequestBody PositionRequest request){
+        return ResponseEntity.status(200).body(positionService.updatePositions(id,request));
+    }
+
     @DeleteMapping("/deletePosition/{id}")
     public ResponseEntity<?> deletePos(@PathVariable UUID id){
         return ResponseEntity.status(200).body(positionService.deletePositions(id));
     }
-
-
 }
