@@ -1,11 +1,11 @@
 $kind: http-request
-url: "{{hrms.com}}/core/qualifications/updateQualification/c6875a68-36e1-4a6d-8cfd-c0ba512deb61"
+url: "{{hrms.com}}/core/qualifications/updateQualification/0124eb02-17f8-4afe-b786-03352619f7f4"
 method: PUT
 body:
   type: json
   content: "{\r
 
-    \  \"qualificationCode\": \"QUAL-002\",\r
+    \  \"qualificationCode\": \"QUAL-001\",\r
 
     \  \"qualificationName\": \"Bachelor of Computer Science with specialism in Data Analytics\",\r
 

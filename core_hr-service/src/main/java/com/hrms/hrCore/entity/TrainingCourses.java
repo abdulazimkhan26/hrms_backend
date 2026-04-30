@@ -1,12 +1,15 @@
 package com.hrms.hrCore.entity;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -21,6 +24,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@DynamicUpdate
+@Entity
 @Table(name="training_courses", schema="core")
 public class TrainingCourses {
 
@@ -47,7 +52,7 @@ public class TrainingCourses {
     @Column(name="provider_id", nullable=false)
     private UUID providerId;
     
-    @Column(name="cost", nullable=false, precision=3, scale=2)
+    @Column(name="cost", nullable=false, precision= 10, scale=2)
     private BigDecimal cost;
 
     @Column(name="is_active", nullable=false)
@@ -58,9 +63,9 @@ public class TrainingCourses {
 
     @CreationTimestamp
     @Column(name="created_at", nullable=false)
-    private UUID createdAt;
+    private OffsetDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name="updated_at", nullable=false)
-    private UUID updatedAt;
+    private OffsetDateTime updatedAt;
 }

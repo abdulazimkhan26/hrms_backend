@@ -1,11 +1,11 @@
 $kind: http-request
-url: "{{hrms.com}}/core/CSP/updateCsp/47e18c16-b3ab-4713-886a-783565840638"
+url: "{{hrms.com}}/core/CSP/updateCsp/3c80b813-12dd-4492-9321-0f2d9468aa12"
 method: PUT
 body:
   type: json
   content: "{\r
 
-    \  \"providerNumber\": \"CSP-MY-002\",\r
+    \  \"providerNumber\": \"CSP-GSA-001\",\r
 
     \  \"name\": \"Global Skills Academy\",\r
 

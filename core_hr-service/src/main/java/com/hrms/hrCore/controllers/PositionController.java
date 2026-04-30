@@ -25,21 +25,21 @@ public class PositionController {
 
     @GetMapping("/allPositions")
     public ResponseEntity<?> allPos(){
-        return ResponseEntity.status(200).body(positionService.allPositions());
+        return positionService.allPositions();
     }
 
     @PostMapping("/createPosition")
     public ResponseEntity<?> createPos(@RequestBody PositionRequest request){
-        return ResponseEntity.status(200).body(positionService.createPositions(request));
+        return positionService.createPositions(request);
     }
 
     @PutMapping("/updatePosition/{id}")
     public ResponseEntity<?> updatePos(@PathVariable UUID id, @RequestBody PositionRequest request){
-        return ResponseEntity.status(200).body(positionService.updatePositions(id,request));
+        return positionService.updatePositions(id,request);
     }
 
     @DeleteMapping("/deletePosition/{id}")
     public ResponseEntity<?> deletePos(@PathVariable UUID id){
-        return ResponseEntity.status(200).body(positionService.deletePositions(id));
+        return positionService.deletePositions(id);
     }
 }

@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
@@ -20,6 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@DynamicUpdate
 @Entity
 @Table(name = "jobs", schema = "core")
 public class Jobs {
@@ -34,13 +35,11 @@ public class Jobs {
     @Column(name = "job_title", nullable = false, unique = true)
     private String jobTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id", nullable = false, foreignKey = @ForeignKey(name = "jobs_position_id_fkey"))
-    private Positions positionId;
+    @Column(name = "position_id", nullable = false)
+    private UUID positionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reports_to_job_id", foreignKey = @ForeignKey(name = "jobs_reports_to_job_id_fkey"))
-    private Jobs reportsToJobId;
+    @Column(name = "reports_to_job_id")
+    private UUID reportsToJobId;
 
     @Column(name = "salary", precision = 14, scale = 2)
     private BigDecimal salary;
@@ -60,22 +59,21 @@ public class Jobs {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @Column(name = "state_id")
+    @Column(name = "state_id", nullable=false)
     private UUID stateId;
 
-    @Column(name = "location_id")
+    @Column(name = "location_id", nullable=false)
     private UUID locationId;
 
-    @Column(name = "company_id")
+    @Column(name = "company_id", nullable=false)
     private UUID companyId;
 
-    @Column(name = "department_id")
+    @Column(name = "department_id", nullable=false)
     private UUID departmentId;
 
-    @Column(name = "cost_centre_id")
+    @Column(name = "cost_centre_id", nullable=false)
     private UUID costCentreId;
 
-    @ColumnDefault("DRAFT")
     @Column(name = "status", nullable = false)
     private String status;
 
@@ -88,7 +86,6 @@ public class Jobs {
     @Column(name = "decline_reason")
     private String declineReason;
 
-    @ColumnDefault("true")
     @Column(name = "is_active", nullable = false)
     private Boolean active;
 

@@ -36,14 +36,13 @@ public class QualificationController {
     }
 
     @PutMapping("updateQualification/{id}")
-    public ResponseEntity<?> updateQualification(@PathVariable UUID id, @RequestBody QualificationRequest request) {
-        
-        return ResponseEntity.status(200).body(qualificationService.updateQualifications(id, request));
+    public ResponseEntity<?> updateQualification(@PathVariable UUID id, @RequestBody QualificationRequest request) {        
+        return qualificationService.updateQualifications(id, request);
     }
 
     @DeleteMapping("/deleteQualification/{id}")
     public ResponseEntity<?> deleteQualification(@PathVariable UUID id){
-        return ResponseEntity.status(200).body(qualificationService.deleteQualification(id));
+        return qualificationService.deleteQualification(id);
     }     
     
     

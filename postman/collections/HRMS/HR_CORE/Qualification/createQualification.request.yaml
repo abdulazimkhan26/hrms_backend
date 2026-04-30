@@ -5,7 +5,7 @@ body:
   type: json
   content: "{\r
 
-    \  \"qualificationCode\": \"QUAL-002\",\r
+    \  \"qualificationCode\": \"QUAL-00\",\r
 
     \  \"qualificationName\": \"Bachelor of Computer Science specialism in Data Analytics\",\r
 

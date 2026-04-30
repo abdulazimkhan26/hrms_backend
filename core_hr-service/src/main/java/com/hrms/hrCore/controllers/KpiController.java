@@ -34,14 +34,13 @@ public class KpiController {
     }
 
     @PutMapping("updateKpi/{id}")
-    public ResponseEntity<?> updateKpi(@PathVariable UUID id, @RequestBody KpiRequest request) {
-        
-        return ResponseEntity.status(200).body(kpiService.updateKpi(id, request));
+    public ResponseEntity<?> updateKpi(@PathVariable UUID id, @RequestBody KpiRequest request) {        
+        return kpiService.updateKpi(id, request);
     }
 
     @DeleteMapping("/deleteKpi/{id}")
     public ResponseEntity<?> deleteKpi(@PathVariable UUID id){
-        return ResponseEntity.status(200).body(kpiService.deleteKpis(id));
+        return kpiService.deleteKpis(id);
     }  
     
 }

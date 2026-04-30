@@ -24,11 +24,11 @@ public class CourseServiceProviderController {
     private final CourseServiceProvidersService CSP_service;
 
     @GetMapping("/allCsps")
-    public ResponseEntity<?> allCsps(){ return ResponseEntity.status(200).body(CSP_service.allCsps()); }
+    public ResponseEntity<?> allCsps(){ return CSP_service.allCsps(); }
     @PostMapping("/createCsp")
-    public ResponseEntity<?> createCsp(@RequestBody CourseServiceProvidersRequest cspReq){ return ResponseEntity.status(200).body(CSP_service.createCsp(cspReq)); }
+    public ResponseEntity<?> createCsp(@RequestBody CourseServiceProvidersRequest cspReq){ return CSP_service.createCsp(cspReq); }
     @PutMapping("/updateCsp/{id}")
-    public ResponseEntity<?> updateCsp(@PathVariable UUID id, @RequestBody CourseServiceProvidersRequest cspReq){ return ResponseEntity.status(200).body(CSP_service.updateCsp(id, cspReq)); }
+    public ResponseEntity<?> updateCsp(@PathVariable UUID id, @RequestBody CourseServiceProvidersRequest cspReq){ return CSP_service.updateCsp(id, cspReq); }
     @DeleteMapping("/deleteCsp/{id}")
-    public ResponseEntity<?> deleteCsp(@PathVariable UUID id){ return ResponseEntity.status(200).body(CSP_service.deleteCsp(id)); }    
+    public ResponseEntity<?> deleteCsp(@PathVariable UUID id){ return CSP_service.deleteCsp(id); }    
 }

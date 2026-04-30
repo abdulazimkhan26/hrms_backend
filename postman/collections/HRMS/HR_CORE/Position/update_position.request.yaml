@@ -1,0 +1,39 @@
+$kind: http-request
+url: "{{hrms.com}}/core/positions/updatePosition/55b24886-6489-4892-88cd-ea52d14ce6d2"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \            \"positionCode\": \"POS-003\",\r
+
+    \            \"positionName\": \"QA TESTER\",\r
+
+    \            \"positionDescription\": \"Responsible for testing the program\",\r
+
+    \            \"positionLevelId\": \"37ac3822-a23c-47e5-a339-fe0952bd0255\",\r
+
+    \            \"salaryMinimum\": 4000.00,\r
+
+    \            \"salaryMaximum\": 7000.00,\r
+
+    \            \"workTypeId\": \"2d58c9a4-0199-44b4-bc4f-63aad056ac3b\",\r
+
+    \            \"contractLength\": \"12\",\r
+
+    \            \"weeklyHoursMin\": 40.00,\r
+
+    \            \"weeklyHoursMax\": 45.00,\r
+
+    \            \"status\": \"DRAFT\",\r
+
+    \            \"reportsTo\": null,\r
+
+    \            \"active\": false,\r
+
+    \            \"approvedBy\": null,\r
+
+    \            \"approvedAt\": null\r
+
+    \        }"
+order: 4000

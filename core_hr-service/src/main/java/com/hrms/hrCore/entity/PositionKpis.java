@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
+@DynamicUpdate
 @Table(name = "position_kpis", schema = "core")
 public class PositionKpis {
     @Id
@@ -35,7 +37,7 @@ public class PositionKpis {
     private Kpis kpi;    
     
     @Check(constraints = "weighting >= 0 AND weighting <= 100")
-    @Column(name = "weighting", precision = 3, scale = 2, nullable = false)
+    @Column(name = "weighting", precision = 5, scale = 2, nullable = false)
     private BigDecimal weighting;  
     
     @CreationTimestamp

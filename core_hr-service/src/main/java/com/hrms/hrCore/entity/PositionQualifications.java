@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 @Table(name="position_qualifications", schema="core")
 public class PositionQualifications {
 
@@ -31,8 +33,7 @@ public class PositionQualifications {
     @Column(name="id", nullable=false, updatable=false)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name="position_id", nullable=false, foreignKey= @ForeignKey(name="position_qualifications_position_id_fkey"))
+    @Column(name="position_id", nullable=false)
     private UUID positionId;
 
     @Column(name="qualification_id", nullable=false)
